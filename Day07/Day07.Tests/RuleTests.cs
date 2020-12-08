@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Day07.Tests
 {
-    public class Tests
+    public class RuleTests
     {
         private const string TestCaseData1 = "light red bags contain 1 bright white bag, 2 muted yellow bags.";
         private const string TestCaseData2 = "dark orange bags contain 3 bright white bags, 4 muted yellow bags.";
@@ -32,11 +32,28 @@ namespace Day07.Tests
         [TestCase(TestCaseData7, "vibrant plum")]
         [TestCase(TestCaseData8, "faded blue")]
         [TestCase(TestCaseData9, "dotted black")]
-        public void Reads_Color_From_Data(string rule, string color)
+        public void Reads_Color_From_Data(string ruleData, string color)
         {
-            var bag = new Bag(rule);
+            var rule = new Rule(ruleData);
 
-            bag.Color.Should().Be(color);
+            rule.Color.Should().Be(color);
+        }
+
+        [Test]
+        [TestCase(TestCaseData1, 2)]
+        [TestCase(TestCaseData2, 2)]
+        [TestCase(TestCaseData3, 1)]
+        [TestCase(TestCaseData4, 2)]
+        [TestCase(TestCaseData5, 2)]
+        [TestCase(TestCaseData6, 2)]
+        [TestCase(TestCaseData7, 2)]
+        [TestCase(TestCaseData8, 0)]
+        [TestCase(TestCaseData9, 0)]
+        public void Reads_Contain_From_Data(string ruleData, int count)
+        {
+            var rule = new Rule(ruleData);
+
+            rule.Contains.Should().HaveCount(count);
         }
     }
 }
