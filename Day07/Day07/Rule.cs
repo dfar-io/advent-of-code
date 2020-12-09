@@ -1,29 +1,65 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Day07
 {
     public class Rule
     {
         public string Color { get; private set; }
-        public Dictionary<int, string> Contains { get; private set; }
+        public (string, int)[] Contains { get; private set; }
 
         public Rule(string data)
         {   
             var bagsIndex = data.IndexOf("bag");
             Color = data.Substring(0, bagsIndex - 1);
 
-            Contains = new Dictionary<int, string>();
             var containIndex = data.IndexOf("contain");
             var containsData = data.Substring(containIndex + 8);
-
-            if (containsData.Contains("no other bags.")) { return; }
+            if (containsData.Contains("no other bags."))
+            { 
+                Contains = new (string, int)[0];
+                return;
+            }
 
             var containsRules = containsData.Split(',');
-            foreach (var rule in containsRules)
+            Contains = new (string, int)[containsRules.Length];
+            for (int i = 0; i < Contains.Length; i++)
             {
-                Contains.Add(int.Parse(rule.Trim().Substring(0, 1)), "");
+                var count = int.Parse(containsRules[i].Trim().Substring(0, 1));
+                var color = containsRules[i].Trim().Substring(2, containsRules[i].Trim().IndexOf("bag")-3);
+                Contains[i] = (color, count);
             }
+        }
+
+        public bool CanContainColor(Rule[] rules, string color)
+        {
+            foreach (var contain in Contains)
+            {
+                if (contain.Item1 == color) { return true; }
+                else
+                {
+                    var rule = rules.Where(r => r.Color == contain.Item1).FirstOrDefault();
+                    if (rule.CanContainColor(rules, color))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public int BagCount(Rule[] rules, int sum)
+        {
+            foreach (var contain in Contains)
+            {
+                sum += contain.Item2;
+                var rule = rules.Where(r => r.Color == contain.Item1).FirstOrDefault();
+                sum += rule.BagCount(rules, sum);
+            }
+
+            return sum;
         }
     }
 }

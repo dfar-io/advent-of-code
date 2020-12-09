@@ -49,11 +49,67 @@ namespace Day07.Tests
         [TestCase(TestCaseData7, 2)]
         [TestCase(TestCaseData8, 0)]
         [TestCase(TestCaseData9, 0)]
-        public void Reads_Contain_From_Data(string ruleData, int count)
+        public void Reads_Correct_ContainCount_From_Data(string ruleData, int count)
         {
             var rule = new Rule(ruleData);
 
             rule.Contains.Should().HaveCount(count);
+        }
+
+        [Test]
+        public void Reads_Contain_From_Data()
+        {
+            var rule = new Rule(TestCaseData1);
+
+            rule.Contains.Should().HaveCount(2);
+            rule.Contains[0].Should().Be(("bright white", 1));
+            rule.Contains[1].Should().Be(("muted yellow", 2));
+        }
+
+        [Test]
+        public void Correctly_Returns_CanContain()
+        {
+            var rules = new Rule[]
+            {
+                new Rule(TestCaseData1),
+                new Rule(TestCaseData2),
+                new Rule(TestCaseData3),
+                new Rule(TestCaseData4),
+                new Rule(TestCaseData5),
+                new Rule(TestCaseData6),
+                new Rule(TestCaseData7),
+                new Rule(TestCaseData8),
+                new Rule(TestCaseData9),
+            };
+
+            rules[0].CanContainColor(rules, "shiny gold").Should().BeTrue();
+            rules[1].CanContainColor(rules, "shiny gold").Should().BeTrue();
+            rules[2].CanContainColor(rules, "shiny gold").Should().BeTrue();
+            rules[3].CanContainColor(rules, "shiny gold").Should().BeTrue();
+            rules[4].CanContainColor(rules, "shiny gold").Should().BeFalse();
+            rules[5].CanContainColor(rules, "shiny gold").Should().BeFalse();
+            rules[6].CanContainColor(rules, "shiny gold").Should().BeFalse();
+            rules[7].CanContainColor(rules, "shiny gold").Should().BeFalse();
+            rules[8].CanContainColor(rules, "shiny gold").Should().BeFalse();
+        }
+
+        [Test]
+        public void Correctly_Returns_BagCount()
+        {
+            var rules = new Rule[]
+            {
+                new Rule(TestCaseData1),
+                new Rule(TestCaseData2),
+                new Rule(TestCaseData3),
+                new Rule(TestCaseData4),
+                new Rule(TestCaseData5),
+                new Rule(TestCaseData6),
+                new Rule(TestCaseData7),
+                new Rule(TestCaseData8),
+                new Rule(TestCaseData9),
+            };
+
+            //rules[4].BagCount(rules, 0).Should().Be(32);
         }
     }
 }
