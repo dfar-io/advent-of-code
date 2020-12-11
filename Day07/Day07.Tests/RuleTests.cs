@@ -109,7 +109,7 @@ namespace Day07.Tests
                 new Rule(TestCaseData9),
             };
 
-            //rules[4].BagCount(rules, 0).Should().Be(32);
+            rules[4].BagCount(rules).Should().Be(32);
         }
     }
 }

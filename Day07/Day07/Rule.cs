@@ -50,16 +50,22 @@ namespace Day07
             return false;
         }
 
-        public int BagCount(Rule[] rules, int sum)
+        public int BagCount(Rule[] rules)
         {
-            foreach (var contain in Contains)
+            // do not include self
+            return BagCount(rules, this, 1, 1) - 1;
+        }
+
+        private int BagCount(Rule[] rules, Rule rule, int bagCount, int multiplier)
+        {
+            int sum = 0;
+            foreach (var contain in rule.Contains)
             {
-                sum += contain.Item2;
-                var rule = rules.Where(r => r.Color == contain.Item1).FirstOrDefault();
-                sum += rule.BagCount(rules, sum);
+                var nextRule = rules.Where(r => r.Color == contain.Item1).FirstOrDefault();
+                sum += BagCount(rules, nextRule, contain.Item2, bagCount);
             }
 
-            return sum;
+            return (sum + bagCount) * multiplier;
         }
     }
 }
