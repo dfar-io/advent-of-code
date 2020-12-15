@@ -14,8 +14,9 @@ namespace Day10
 
         public bool CanTake(int joltageInput)
         {
-            // this might be a performance problem if the dataset is large
-            return Enumerable.Range(OutputJoltage - 3, 3).Contains(joltageInput);
+            return OutputJoltage == joltageInput + 3 ||
+                   OutputJoltage == joltageInput + 2 ||
+                   OutputJoltage == joltageInput + 1;
         }
     }
 }
