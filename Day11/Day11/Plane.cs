@@ -45,9 +45,9 @@ namespace Day11
             var width = finalState.GetLength(0);
             var length = finalState.GetLength(1);
             var sum = 0;
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < width; i++)
             {
-                for (int j = 0; j < width; j++)
+                for (int j = 0; j < length; j++)
                 {
                     sum += finalState[i,j] == '#' ? 1 : 0;
                 }
@@ -65,13 +65,13 @@ namespace Day11
 
         private char[,] Process(char[,] currentState)
         {
-            var length = currentState.GetLength(0);
-            var width = currentState.GetLength(1);
+            var width = currentState.GetLength(0);
+            var length = currentState.GetLength(1);
             var newState = new char[width,length];
 
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < width; i++)
             {
-                for (int j = 0; j < width; j++)
+                for (int j = 0; j < length; j++)
                 {
                     newState[i, j] = ProcessField(currentState, i, j);
                 }
@@ -111,9 +111,9 @@ namespace Day11
                     int cOffset = col + co;
 
                     // Points to a space that exists
-                    if (rOffset >= 0 && rOffset < cols && cOffset >= 0 && cOffset < rows)
+                    if (rOffset >= 0 && rOffset < rows && cOffset >= 0 && cOffset < cols)
                     {
-                        sum += currentState[cOffset,rOffset] == '#' ? 1 : 0;
+                        sum += currentState[rOffset,cOffset] == '#' ? 1 : 0;
                     }
                 }
             }
