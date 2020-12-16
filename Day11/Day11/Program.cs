@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Day11
 {
@@ -6,7 +7,10 @@ namespace Day11
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var puzzleData = File.ReadAllLines("puzzle-input.txt");
+            var plane = new Plane(puzzleData);
+
+            Console.WriteLine($"Part 1: {plane.OccupiedSeatCount}");
         }
     }
 }
