@@ -3,7 +3,8 @@
 // me already
 
 // For now just changing this when needed
-var solver = new Solver03();
+// can we just grab the highest solver and use that?
+var solver = new Solver04();
 
 Console.WriteLine($"Answer 1: {solver.Answer1}");
 Console.WriteLine($"Answer 2: {solver.Answer2}");
