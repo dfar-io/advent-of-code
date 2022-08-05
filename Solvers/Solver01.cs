@@ -1,8 +1,5 @@
-public class Solver01
+public class Solver01 : BaseSolver
 {
-    public int Answer1 { get; init; }
-    public int Answer2 { get; init; }
-
     public Solver01()
     {
         var text = System.IO.File.ReadAllText(@"input/01.txt");
