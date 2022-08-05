@@ -2,9 +2,20 @@
 // Crazy - autocomplete (Github Autopilot I believe?) picked up the answer for
 // me already
 
-// For now just changing this when needed
-// can we just grab the highest solver and use that?
-var solver = new Solver04();
+// use reflection to get the latest solver
+var classType = typeof(BaseSolver);
+var latestSolver = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(classType.IsAssignableFrom)
+                .OrderByDescending(s => s.FullName)
+                .First();
+var solverInstance = Activator.CreateInstance(latestSolver);
+if (solverInstance == null)
+{
+    throw new Exception("Error when finding latest solver");
+}
 
-Console.WriteLine($"Answer 1: {solver.Answer1}");
-Console.WriteLine($"Answer 2: {solver.Answer2}");
+var answer1 = solverInstance.GetType().GetProperty("Answer1").GetValue(solverInstance);
+var answer2 = solverInstance.GetType().GetProperty("Answer2").GetValue(solverInstance);
+Console.WriteLine($"Answer 1: {answer1}");
+Console.WriteLine($"Answer 2: {answer2}");
