@@ -3,7 +3,7 @@
 // me already
 
 // For now just changing this when needed, 
-var solver = new Solver01();
+var solver = new Solver02();
 
 Console.WriteLine($"Answer 1: {solver.Answer1}");
 Console.WriteLine($"Answer 2: {solver.Answer2}");
