@@ -1,24 +1,32 @@
 public class Solver04 : BaseSolver
 {
-    public Solver04()
+    private int _answer1;
+    private int _answer2;
+
+    public Solver04(string[] input) : base(input)
     {
-        var secretKey = System.IO.File.ReadAllText(@"input/04.txt");
         var x = 0;
 
         while (true)
         {
-            var hash = GetHash($"{secretKey}{x}");
-            // use this to get Answer1
-            //if (hash.StartsWith("00000"))
+            var hash = GetHash($"{input[0]}{x}");
+            if (hash.StartsWith("00000") && _answer1 == 0)
+            {
+                _answer1 = x;
+            }
             if (hash.StartsWith("000000"))
             {
-                Answer2 = x;
+                _answer2 = x;
                 break;
             }
 
             x++;
         }
     }
+
+    public override int Answer1 => _answer1;
+
+    public override int Answer2 => _answer2;
 
     // https://stackoverflow.com/a/24031467
     private string GetHash(string input)
