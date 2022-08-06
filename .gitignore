@@ -3,8 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# Input files
-input/
+# Input file
+input.txt
 
 # User-specific files
 *.rsuser

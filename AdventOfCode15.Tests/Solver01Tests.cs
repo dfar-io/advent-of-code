@@ -5,11 +5,6 @@ namespace AdventOfCode15.Tests;
 
 public class Solver01Tests
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
     [TestCase("(())", 0)]
     [TestCase("()()", 0)]
@@ -23,5 +18,13 @@ public class Solver01Tests
     public void Solver01_P1(string input, int answer)
     {
         answer.Should().Be(new Solver01(input).Answer1);   
+    }
+
+    [Test]
+    [TestCase(")", 1)]
+    [TestCase("()())", 5)]
+    public void Solver01_P2(string input, int answer)
+    {
+        answer.Should().Be(new Solver01(input).Answer2);   
     }
 }

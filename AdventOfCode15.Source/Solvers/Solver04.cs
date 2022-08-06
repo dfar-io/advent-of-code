@@ -3,13 +3,13 @@ public class Solver04 : BaseSolver
     private int _answer1;
     private int _answer2;
 
-    public Solver04(string[] input) : base(input)
+    public Solver04(string input) : base(input)
     {
         var x = 0;
 
         while (true)
         {
-            var hash = GetHash($"{input[0]}{x}");
+            var hash = GetHash($"{_input[0]}{x}");
             if (hash.StartsWith("00000") && _answer1 == 0)
             {
                 _answer1 = x;

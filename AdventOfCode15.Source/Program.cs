@@ -3,7 +3,7 @@
 // me already
 
 // use reflection to get the latest solver
-var lines = System.IO.File.ReadAllLines(@"input/02.txt");
+var lines = System.IO.File.ReadAllLines(@"input.txt");
 var classType = typeof(BaseSolver);
 var latestSolver = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
@@ -12,7 +12,9 @@ var latestSolver = AppDomain.CurrentDomain.GetAssemblies()
                 .First();
 // Need to use the new object[] to insert the lines array as one object,
 // otherwise the params will read each line
-var solverInstance = Activator.CreateInstance(latestSolver, new object[] { lines });
+var solverInstance = lines.Count() == 1 ?
+    Activator.CreateInstance(latestSolver, lines[0]) :
+    Activator.CreateInstance(latestSolver, new object[] { lines });
 if (solverInstance == null)
 {
     throw new Exception("Error when finding latest solver");
@@ -37,5 +39,6 @@ if (a2prop == null)
 var answer1 = a1prop.GetValue(solverInstance);
 var answer2 = a2prop.GetValue(solverInstance);
 
+Console.WriteLine($"{type.Name}");
 Console.WriteLine($"Answer 1: {answer1}");
 Console.WriteLine($"Answer 2: {answer2}");

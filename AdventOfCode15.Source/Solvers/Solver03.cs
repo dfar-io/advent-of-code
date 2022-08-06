@@ -4,6 +4,10 @@ public class Solver03 : BaseSolver
     private HashSet<(int, int)> _nonRoboVisited = new HashSet<(int, int)>();
     private HashSet<(int, int)> _roboVisited = new HashSet<(int, int)>();
 
+    public Solver03(string input) : this(new string[] {input})
+    {
+    }
+    
     public Solver03(string[] input) : base(input)
     {
         var x = 0;
