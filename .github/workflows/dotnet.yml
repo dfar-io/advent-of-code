@@ -17,11 +17,10 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
-    - name: Test
-      run: dotnet test --collect:"XPlat Code Coverage"
-    - name: Publish code coverage
+    - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
       with:
+        coverageCommand: dotnet test --collect:"XPlat Code Coverage"
         coverageLocations: ${{github.workspace}}/AdventOfCode15.Tests/TestResults/*.xml:cobertura
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
