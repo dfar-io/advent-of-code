@@ -1,4 +1,4 @@
-name: .NET
+name: Test & Publish Code Coverage
 
 on:
   push:
