@@ -1,9 +1,5 @@
 public class Solver01 : BaseSolver
 {
-    public Solver01(string[] input) : base(input)
-    {
-    }
-
     public Solver01(string input) : base(input)
     {
     }
