@@ -29,9 +29,9 @@ public class Solver01Tests
     }
 
     [Test]
-    [TestCase("2x3x4", 58, 34)]
-    [TestCase("1x1x10", 43, 14)]
-    public void Solver02_P1(string input, int answer1, int answer2)
+    [TestCase(new string[] { "2x3x4" }, 58, 34)]
+    [TestCase(new string[] { "1x1x10" }, 43, 14)]
+    public void Solver02_P1(string[] input, int answer1, int answer2)
     {
         var solver = new Solver02(input);
         answer1.Should().Be(solver.Answer1);
