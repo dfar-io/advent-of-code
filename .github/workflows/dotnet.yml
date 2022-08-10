@@ -22,6 +22,6 @@ jobs:
       with:
         coverageCommand: dotnet test --collect:"XPlat Code Coverage"
         coverageLocations: ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml:cobertura
-        prefix: ${{github.workspace}}/AdventOfCode15.Source/
+        prefix: ${{github.workspace}}/
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
