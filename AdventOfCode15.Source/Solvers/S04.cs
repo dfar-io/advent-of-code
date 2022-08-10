@@ -1,9 +1,9 @@
-public class Solver04 : BaseSolver
+public class S04 : BaseSolver
 {
     private int _answer1;
     private int _answer2;
 
-    public Solver04(string input) : base(input)
+    public S04(string input) : base(input)
     {
         var x = 0;
 

@@ -1,14 +1,14 @@
-public class Solver03 : BaseSolver
+public class S03 : BaseSolver
 {
     private HashSet<(int, int)> _visited = new HashSet<(int, int)>();
     private HashSet<(int, int)> _nonRoboVisited = new HashSet<(int, int)>();
     private HashSet<(int, int)> _roboVisited = new HashSet<(int, int)>();
 
-    public Solver03(string input) : this(new string[] {input})
+    public S03(string input) : this(new string[] {input})
     {
     }
     
-    public Solver03(string[] input) : base(input)
+    public S03(string[] input) : base(input)
     {
         var x = 0;
         var y = 0;

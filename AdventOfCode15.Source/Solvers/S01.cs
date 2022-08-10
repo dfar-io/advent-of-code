@@ -1,6 +1,6 @@
-public class Solver01 : BaseSolver
+public class S01 : BaseSolver
 {
-    public Solver01(string input) : base(input)
+    public S01(string input) : base(input)
     {
     }
 

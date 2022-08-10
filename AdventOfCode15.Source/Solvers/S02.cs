@@ -1,8 +1,8 @@
 using System;
 
-public class Solver02 : BaseSolver
+public class S02 : BaseSolver
 {
-    public Solver02(string[] input) : base(input)
+    public S02(string[] input) : base(input)
     {
     }
 
