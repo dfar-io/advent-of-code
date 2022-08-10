@@ -19,7 +19,7 @@ jobs:
         dotnet-version: 6.0.x
     - name: Run tests
       run: |
-        dotnet test --collect:"XPlat Code Coverage"
+        dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings
         cat ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml
     - name: Publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
