@@ -2,10 +2,6 @@ using System;
 
 public class Solver02 : BaseSolver
 {
-    public Solver02(string[] input) : base(input)
-    {
-    }
-
     public Solver02(string input) : base(input)
     {
     }
