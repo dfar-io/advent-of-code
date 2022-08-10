@@ -20,7 +20,9 @@ jobs:
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
       with:
-        coverageCommand: dotnet test --collect:"XPlat Code Coverage"
+        coverageCommand: |
+          dotnet test --collect:"XPlat Code Coverage"
+          ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml
         coverageLocations: ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml:cobertura
         prefix: ${{github.workspace}}/AdventOfCode15.Source//
       env:
