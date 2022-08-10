@@ -19,12 +19,11 @@ jobs:
         dotnet-version: 6.0.x
     - name: Run tests
       run: |
-        dotnet test --collect:"XPlat Code Coverage"
+        dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput="${{github.workspace}}/coverage.info"
         cat ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml
     - name: Publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
       with:
-        coverageLocations: ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml:cobertura
-        prefix: /home/runner/work/advent-of-code-15/advent-of-code-15/AdventOfCode15.Source
+        coverageLocations: ${{github.workspace}}/coverage/**/*.info:lcov
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
