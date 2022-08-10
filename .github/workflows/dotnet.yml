@@ -25,5 +25,6 @@ jobs:
       uses: paambaati/codeclimate-action@v3.0.0
       with:
         coverageLocations: ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml:cobertura
+        prefix: ${{ github.workspace}}
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
