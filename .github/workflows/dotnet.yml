@@ -20,7 +20,7 @@ jobs:
     - name: Run tests
       run: |
         dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput="${{github.workspace}}/coverage.info"
-        cat ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml
+        cat ${{github.workspace}}/coverage.info
     - name: Publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
       with:
