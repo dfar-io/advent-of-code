@@ -22,7 +22,7 @@ jobs:
       with:
         coverageCommand: |
           dotnet test --collect:"XPlat Code Coverage"
-          ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml
+          cat ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml
         coverageLocations: ${{github.workspace}}/AdventOfCode15.Tests/TestResults/**/*.xml:cobertura
         prefix: ${{github.workspace}}/AdventOfCode15.Source//
       env:
