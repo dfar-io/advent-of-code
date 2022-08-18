@@ -13,6 +13,11 @@ public class S05 : BaseSolver
             {
                 _answer1++;
             }
+
+            if (IsNiceStringP2(value))
+            {
+                _answer2++;
+            }
         }
     }
 
@@ -28,5 +33,31 @@ public class S05 : BaseSolver
         var hasDoubleLetter = regex.Matches(value).Count() >= 1;
         var hasInvalidStrings = new[] { "ab", "cd", "pq", "xy" }.Any(c => value.Contains(c));
         return hasThreeVowels && hasDoubleLetter && !hasInvalidStrings;
+    }
+
+    private bool IsNiceStringP2(string value)
+    {
+        var containsPair = false;
+        var containsRepeatWithLetterBetween = false;
+
+        for (int i = 0; i < value.Length - 1; i++)
+        {
+            if (!containsPair)
+            {
+                var pair = value.Substring(i, 2);
+                var pairIndex = value.IndexOf(pair, i + 2);
+                if (pairIndex > -1)
+                {
+                    containsPair = true;
+                }
+            }
+
+            if (i < value.Length - 2 && value[i] == value[i + 2])
+            {
+                containsRepeatWithLetterBetween = true;
+            }
+        }
+
+        return containsPair && containsRepeatWithLetterBetween;
     }
 }
