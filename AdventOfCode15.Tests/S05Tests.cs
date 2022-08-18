@@ -7,7 +7,7 @@ public class S05Tests
 {
     [Test]
     [TestCase(new string[] { "ugknbfddgicrmopn" }, 1)]
-    [TestCase(new string[] { "aaa" }, 0)]
+    [TestCase(new string[] { "aaa" }, 1)]
     [TestCase(new string[] { "jchzalrnumimnmhp" }, 0)]
     [TestCase(new string[] { "haegwjzuvuyypxyu" }, 0)]
     [TestCase(new string[] { "dvszwmarrgswjxmb" }, 0)]
