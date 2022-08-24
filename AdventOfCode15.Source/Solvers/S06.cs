@@ -1,8 +1,5 @@
 public class S06 : BaseSolver
 {
-    private int _answer1;
-    private int _answer2;
-
     public S06(string[] input) : base(input)
     {
         var lights = new bool[1000,1000];
@@ -81,10 +78,6 @@ public class S06 : BaseSolver
             }
         }
     }
-
-    public override int Answer1 => _answer1;
-
-    public override int Answer2 => _answer2;
 }
 
 class Command

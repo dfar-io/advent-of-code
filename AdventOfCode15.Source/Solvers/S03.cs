@@ -40,22 +40,9 @@ public class S03 : BaseSolver
 
             ModifyLocation(ref x, ref y, direction);
             _visited.Add((x, y));
-        }
-    }
 
-    public override int Answer1
-    {
-        get
-        {
-            return _visited.Count();
-        }
-    }
-
-    public override int Answer2
-    {
-        get
-        {
-            return _roboVisited.Union(_nonRoboVisited).Count();
+            _answer1 = _visited.Count();
+            _answer2 = _roboVisited.Union(_nonRoboVisited).Count();;
         }
     }
 
