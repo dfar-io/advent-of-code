@@ -13,4 +13,12 @@ public class S06Tests
     {
         answer.Should().Be(new S06(input).Answer1);   
     }
+
+    [Test]
+    [TestCase(new string[] { "turn on 0,0 through 0,0" }, 1)]
+    [TestCase(new string[] { "toggle 0,0 through 999,999" }, 2000000)]
+    public void S06P2(string[] input, int answer)
+    {
+        answer.Should().Be(new S06(input).Answer2);   
+    }
 }
