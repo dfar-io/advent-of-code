@@ -10,23 +10,23 @@ public class S07Tests
     {
         var input = new string[]
         {
-            "123 -> x",
+            "123 -> a",
             "456 -> y",
-            "x AND y -> d",
-            "x OR y -> e",
-            "x LSHIFT 2 -> f",
+            "a AND y -> d",
+            "a OR y -> e",
+            "a LSHIFT 2 -> f",
             "y RSHIFT 2 -> g",
-            "NOT x -> h",
+            "NOT a -> h",
             "NOT y -> i"
         };
         var solver = new S07(input);
-        solver.GetValue("d").Should().Be(72);
-        solver.GetValue("e").Should().Be(507);
-        solver.GetValue("f").Should().Be(492);
-        solver.GetValue("g").Should().Be(114);
-        solver.GetValue("h").Should().Be(65412);
-        solver.GetValue("i").Should().Be(65079);
-        solver.GetValue("x").Should().Be(123);
-        solver.GetValue("y").Should().Be(456);
+        solver.GetWireValue("d").Value.Should().Be(72);
+        solver.GetWireValue("e").Value.Should().Be(507);
+        solver.GetWireValue("f").Value.Should().Be(492);
+        solver.GetWireValue("g").Value.Should().Be(114);
+        solver.GetWireValue("h").Value.Should().Be(65412);
+        solver.GetWireValue("i").Value.Should().Be(65079);
+        solver.GetWireValue("a").Value.Should().Be(123);
+        solver.GetWireValue("y").Value.Should().Be(456);
     }
 }
