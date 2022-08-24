@@ -6,6 +6,7 @@ public class S07 : BaseSolver
     {
         ProcessCircuit();
 
+        // I came up with 65535 as the answer, too high.
         _answer1 = GetWireValue("a").Value;
     }
 
@@ -23,7 +24,15 @@ public class S07 : BaseSolver
 
                 if (instruction.Operator == Operator.DIRECT)
                 {
-                    wires.Add(new WireValue(instruction.DestinationWire, instruction.DirectValue));
+                    if (instruction.DirectValue != -1)
+                    {
+                        wires.Add(new WireValue(instruction.DestinationWire, (ushort)instruction.DirectValue));
+                    }
+                    else if (WireValueExists(instruction.SourceWire1))
+                    {
+                        var value = GetWireValue(instruction.SourceWire1).Value;
+                        wires.Add(new WireValue(instruction.DestinationWire, value));
+                    }
                 }
                 else if (instruction.Operator == Operator.NOT && WireValueExists(instruction.SourceWire1))
                 {
@@ -43,11 +52,37 @@ public class S07 : BaseSolver
                     var shiftValue = instruction.ShiftValue;
                     wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value >> shiftValue)));
                 }
-                else if (instruction.Operator == Operator.AND && WireValueExists(instruction.SourceWire1) && WireValueExists(instruction.SourceWire2))
+                else if (instruction.Operator == Operator.AND)
                 {
-                    var value1 = GetWireValue(instruction.SourceWire1).Value;
-                    var value2 = GetWireValue(instruction.SourceWire2).Value;
-                    wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 & value2)));
+                    // See if we were provided with a value for the wire instead
+                    // of a wire
+                    var value1 = 0;
+                    var value2 = 0;
+
+                    UInt16.TryParse(instruction.SourceWire1.ToString(), out ushort v1);
+                    if (v1 != 0)
+                    {
+                        value1 = v1;
+                    }
+                    else if (WireValueExists(instruction.SourceWire1))
+                    {
+                        value1 = GetWireValue(instruction.SourceWire1).Value;
+                    }
+
+                    UInt16.TryParse(instruction.SourceWire1.ToString(), out ushort v2);
+                    if (v2 != 0)
+                    {
+                        value2 = v2;
+                    }
+                    else if (WireValueExists(instruction.SourceWire2))
+                    {
+                        value2 = GetWireValue(instruction.SourceWire2).Value;
+                    }
+                    
+                    if (value1 != 0 && value2 != 0)
+                    {
+                        wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 & value2)));
+                    }
                 }
                 else if (instruction.Operator == Operator.OR && WireValueExists(instruction.SourceWire1) && WireValueExists(instruction.SourceWire2))
                 {
@@ -78,7 +113,7 @@ class Instruction
 {
     public string SourceWire1 { get; private set; }
     public string SourceWire2 { get; private set; }
-    public ushort DirectValue { get; private set; }
+    public int DirectValue { get; private set; }
     public Operator Operator { get; private set; }
     public int ShiftValue { get; private set; }
     public string DestinationWire { get; private set; }
@@ -88,6 +123,7 @@ class Instruction
         var splits = instructionString.Split("->");
         var valueInstruction = splits[0].Trim();
         DestinationWire = splits[1].Trim();
+        DirectValue = -1;
 
         if (valueInstruction.Contains("AND"))
         {
@@ -125,7 +161,14 @@ class Instruction
         }
         else
         {
-            DirectValue = Convert.ToUInt16(valueInstruction);
+            if (UInt16.TryParse(valueInstruction, out var directValue))
+            {
+                DirectValue = directValue;
+            }
+            else
+            {
+                SourceWire1 = valueInstruction.Trim();
+            }
             Operator = Operator.DIRECT;
         }
 
