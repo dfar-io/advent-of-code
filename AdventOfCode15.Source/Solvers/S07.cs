@@ -33,11 +33,11 @@ public class S07 : BaseSolver
                 }
                 else if (instruction.Operator == Operator.LSHIFT && WireValueExists(instruction.SourceWire1))
                 {
-                    ProcessLShift(instruction);
+                    ProcessShift(instruction, Operator.LSHIFT);
                 }
                 else if (instruction.Operator == Operator.RSHIFT && WireValueExists(instruction.SourceWire1))
                 {
-                    ProcessRShift(instruction);
+                    ProcessShift(instruction, Operator.RSHIFT);
                 }
                 else if (instruction.Operator == Operator.AND)
                 {
@@ -92,11 +92,18 @@ public class S07 : BaseSolver
         wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value >> shiftValue)));
     }
 
-    private void ProcessLShift(Instruction instruction)
+    private void ProcessShift(Instruction instruction, Operator operator)
     {
         var value = GetWireValue(instruction.SourceWire1).Value;
         var shiftValue = instruction.ShiftValue;
-        wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value << shiftValue)));
+        if (operator == Operator.LSHIFT)
+        {
+            wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value << shiftValue)));
+        }
+        else
+        {
+            wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value >> shiftValue)));
+        }
     }
 
     private void ProcessNot(Instruction instruction)
