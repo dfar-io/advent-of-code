@@ -25,76 +25,98 @@ public class S07 : BaseSolver
 
                 if (instruction.Operator == Operator.DIRECT)
                 {
-                    if (instruction.DirectValue != -1)
-                    {
-                        wires.Add(new WireValue(instruction.DestinationWire, (ushort)instruction.DirectValue));
-                    }
-                    else if (WireValueExists(instruction.SourceWire1))
-                    {
-                        var value = GetWireValue(instruction.SourceWire1).Value;
-                        wires.Add(new WireValue(instruction.DestinationWire, value));
-                    }
+                    ProcessDirect(instruction);
                 }
                 else if (instruction.Operator == Operator.NOT && WireValueExists(instruction.SourceWire1))
                 {
-                    var value = GetWireValue(instruction.SourceWire1).Value;
-                    // Needs to be recast to ushort to prevent overflow
-                    wires.Add(new WireValue(instruction.DestinationWire, (ushort)(~value)));
+                    ProcessNot(instruction);
                 }
                 else if (instruction.Operator == Operator.LSHIFT && WireValueExists(instruction.SourceWire1))
                 {
-                    var value = GetWireValue(instruction.SourceWire1).Value;
-                    var shiftValue = instruction.ShiftValue;
-                    wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value << shiftValue)));
+                    ProcessLShift(instruction);
                 }
                 else if (instruction.Operator == Operator.RSHIFT && WireValueExists(instruction.SourceWire1))
                 {
-                    var value = GetWireValue(instruction.SourceWire1).Value;
-                    var shiftValue = instruction.ShiftValue;
-                    wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value >> shiftValue)));
+                    ProcessRShift(instruction);
                 }
                 else if (instruction.Operator == Operator.AND)
                 {
-                    // See if we were provided with a value for the wire instead
-                    // of a wire
-                    var value1 = 0;
-                    var value2 = 0;
-
-                    UInt16.TryParse(instruction.SourceWire1.ToString(), out ushort v1);
-                    if (v1 != 0)
-                    {
-                        value1 = v1;
-                    }
-                    else if (WireValueExists(instruction.SourceWire1))
-                    {
-                        value1 = GetWireValue(instruction.SourceWire1).Value;
-                    }
-
-                    UInt16.TryParse(instruction.SourceWire2.ToString(), out ushort v2);
-                    if (v2 != 0)
-                    {
-                        value2 = v2;
-                    }
-                    else if (WireValueExists(instruction.SourceWire2))
-                    {
-                        value2 = GetWireValue(instruction.SourceWire2).Value;
-                    }
-                    
-                    if (value1 != 0 && value2 != 0)
-                    {
-                        wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 & value2)));
-                    }
+                    ProcessAnd(instruction);
                 }
                 else if (instruction.Operator == Operator.OR && WireValueExists(instruction.SourceWire1) && WireValueExists(instruction.SourceWire2))
                 {
-                    var value1 = GetWireValue(instruction.SourceWire1).Value;
-                    var value2 = GetWireValue(instruction.SourceWire2).Value;
-                    wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 | value2)));
+                    ProcessOr(instruction);
                 }
             }
         }
 
         _answer1 = GetWireValue("a").Value;
+    }
+
+    private void ProcessOr(Instruction instruction)
+    {
+        var value1 = GetWireValue(instruction.SourceWire1).Value;
+        var value2 = GetWireValue(instruction.SourceWire2).Value;
+        wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 | value2)));
+    }
+
+    private void ProcessAnd(Instruction instruction)
+    {
+        // See if we were provided with a value for the wire instead of a wire
+        int value1 = 0, value2 = 0;
+
+        UInt16.TryParse(instruction.SourceWire1.ToString(), out ushort v1);
+        if (v1 != 0) { value1 = v1; }
+        else if (WireValueExists(instruction.SourceWire1))
+        {
+            value1 = GetWireValue(instruction.SourceWire1).Value;
+        }
+
+        UInt16.TryParse(instruction.SourceWire2.ToString(), out ushort v2);
+        if (v2 != 0) { value2 = v2; }
+        else if (WireValueExists(instruction.SourceWire2))
+        {
+            value2 = GetWireValue(instruction.SourceWire2).Value;
+        }
+
+        if (value1 != 0 && value2 != 0)
+        {
+            wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 & value2)));
+        }
+    }
+
+    private void ProcessRShift(Instruction instruction)
+    {
+        var value = GetWireValue(instruction.SourceWire1).Value;
+        var shiftValue = instruction.ShiftValue;
+        wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value >> shiftValue)));
+    }
+
+    private void ProcessLShift(Instruction instruction)
+    {
+        var value = GetWireValue(instruction.SourceWire1).Value;
+        var shiftValue = instruction.ShiftValue;
+        wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value << shiftValue)));
+    }
+
+    private void ProcessNot(Instruction instruction)
+    {
+        var value = GetWireValue(instruction.SourceWire1).Value;
+        // Needs to be recast to ushort to prevent overflow
+        wires.Add(new WireValue(instruction.DestinationWire, (ushort)(~value)));
+    }
+
+    private void ProcessDirect(Instruction instruction)
+    {
+        if (instruction.DirectValue != -1)
+        {
+            wires.Add(new WireValue(instruction.DestinationWire, (ushort)instruction.DirectValue));
+        }
+        else if (WireValueExists(instruction.SourceWire1))
+        {
+            var value = GetWireValue(instruction.SourceWire1).Value;
+            wires.Add(new WireValue(instruction.DestinationWire, value));
+        }
     }
 
     public bool WireValueExists(string wire)
