@@ -6,7 +6,8 @@ public class S07 : BaseSolver
     {
         ProcessCircuit();
 
-        // I came up with 65535 as the answer, too high.
+        // To get answer 2, change input to use the value of wire a from part 1
+        // So <value of a> -> b
         _answer1 = GetWireValue("a").Value;
     }
 
@@ -69,7 +70,7 @@ public class S07 : BaseSolver
                         value1 = GetWireValue(instruction.SourceWire1).Value;
                     }
 
-                    UInt16.TryParse(instruction.SourceWire1.ToString(), out ushort v2);
+                    UInt16.TryParse(instruction.SourceWire2.ToString(), out ushort v2);
                     if (v2 != 0)
                     {
                         value2 = v2;
