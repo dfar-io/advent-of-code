@@ -92,11 +92,11 @@ public class S07 : BaseSolver
         wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value >> shiftValue)));
     }
 
-    private void ProcessShift(Instruction instruction, Operator operator)
+    private void ProcessShift(Instruction instruction, Operator op)
     {
         var value = GetWireValue(instruction.SourceWire1).Value;
         var shiftValue = instruction.ShiftValue;
-        if (operator == Operator.LSHIFT)
+        if (op == Operator.LSHIFT)
         {
             wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value << shiftValue)));
         }
