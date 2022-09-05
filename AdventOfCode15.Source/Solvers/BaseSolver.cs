@@ -2,15 +2,11 @@ using System.Collections.Generic;
 
 public abstract class BaseSolver
 {
+    protected int _answer1;
+    protected int _answer2;
     protected string[] _input;
-    public abstract int Answer1
-    {
-        get;
-    }
-    public abstract int Answer2
-    {
-        get;
-    }
+    public int Answer1 => _answer1;
+    public int Answer2 => _answer2;
 
 
     public BaseSolver(string input)

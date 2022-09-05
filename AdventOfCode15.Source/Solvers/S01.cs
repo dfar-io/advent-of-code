@@ -2,44 +2,29 @@ public class S01 : BaseSolver
 {
     public S01(string input) : base(input)
     {
-    }
+        var upCount = _input[0].Count(c => c == '(');
+        var downCount = _input[0].Count(c => c == ')');
+        _answer1 = upCount - downCount;
 
-    public override int Answer1
-    {
-        get
+        var elevation = 0;
+        var position = 0;
+        foreach (var character in _input[0])
         {
-            var upCount = _input[0].Count(c => c == '(');
-            var downCount = _input[0].Count(c => c == ')');
-            return upCount - downCount;
-        }
-    }
-
-    public override int Answer2
-    {
-        get
-        {
-            var elevation = 0;
-            var position = 0;
-            foreach (var character in _input[0])
+            position++;
+            if (character == '(')
             {
-                position++;
-                if (character == '(')
-                {
-                    elevation++;
-                }
-                else
-                {
-                    elevation--;
-                }
-
-                if (elevation == -1)
-                {
-                    return position;
-                }
+                elevation++;
+            }
+            else
+            {
+                elevation--;
             }
 
-            // shouldn't happen
-            return -1;
+            if (elevation == -1)
+            {
+                _answer2 = position;
+                break;
+            }
         }
     }
 }
