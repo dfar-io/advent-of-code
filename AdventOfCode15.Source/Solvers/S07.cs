@@ -18,43 +18,20 @@ public class S07 : BaseSolver
         {
             foreach (var instruction in instructions)
             {
-                if (wires.Any(w => w.Wire == instruction.DestinationWire))
-                {
-                    continue;
-                }
-
-                if (instruction.Operator == Operator.DIRECT)
-                {
-                    ProcessDirect(instruction);
-                }
-                else if (instruction.Operator == Operator.NOT && WireValueExists(instruction.SourceWire1))
-                {
-                    ProcessNot(instruction);
-                }
-                else if (instruction.Operator == Operator.LSHIFT && WireValueExists(instruction.SourceWire1))
-                {
-                    ProcessShift(instruction, Operator.LSHIFT);
-                }
-                else if (instruction.Operator == Operator.RSHIFT && WireValueExists(instruction.SourceWire1))
-                {
-                    ProcessShift(instruction, Operator.RSHIFT);
-                }
-                else if (instruction.Operator == Operator.AND)
-                {
-                    ProcessAnd(instruction);
-                }
-                else if (instruction.Operator == Operator.OR && WireValueExists(instruction.SourceWire1) && WireValueExists(instruction.SourceWire2))
-                {
-                    ProcessOr(instruction);
-                }
+                if (wires.Any(w => w.Wire == instruction.DestinationWire)) { continue; }
+                if (instruction.Operator == Operator.DIRECT) { ProcessDirect(instruction); }
+                else if (instruction.Operator == Operator.NOT) { ProcessNot(instruction); }
+                else if (instruction.Operator == Operator.LSHIFT) { ProcessShift(instruction, Operator.LSHIFT); }
+                else if (instruction.Operator == Operator.RSHIFT) { ProcessShift(instruction, Operator.RSHIFT); }
+                else if (instruction.Operator == Operator.AND) { ProcessAnd(instruction); }
+                else if (instruction.Operator == Operator.OR) { ProcessOr(instruction); }
             }
         }
-
-        _answer1 = GetWireValue("a").Value;
     }
 
     private void ProcessOr(Instruction instruction)
     {
+        if (!WireValueExists(instruction.SourceWire1) || !WireValueExists(instruction.SourceWire2)) { return;}
         var value1 = GetWireValue(instruction.SourceWire1).Value;
         var value2 = GetWireValue(instruction.SourceWire2).Value;
         wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 | value2)));
@@ -85,15 +62,9 @@ public class S07 : BaseSolver
         }
     }
 
-    private void ProcessRShift(Instruction instruction)
-    {
-        var value = GetWireValue(instruction.SourceWire1).Value;
-        var shiftValue = instruction.ShiftValue;
-        wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value >> shiftValue)));
-    }
-
     private void ProcessShift(Instruction instruction, Operator op)
     {
+        if (!WireValueExists(instruction.SourceWire1)) { return; }
         var value = GetWireValue(instruction.SourceWire1).Value;
         var shiftValue = instruction.ShiftValue;
         if (op == Operator.LSHIFT)
@@ -108,6 +79,7 @@ public class S07 : BaseSolver
 
     private void ProcessNot(Instruction instruction)
     {
+        if (!WireValueExists(instruction.SourceWire1)) { return; }
         var value = GetWireValue(instruction.SourceWire1).Value;
         // Needs to be recast to ushort to prevent overflow
         wires.Add(new WireValue(instruction.DestinationWire, (ushort)(~value)));
