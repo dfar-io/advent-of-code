@@ -1,5 +1,3 @@
-using System.Text;
-
 public class S08 : BaseSolver
 {
     public int CharCount { get; private set; }
@@ -10,30 +8,51 @@ public class S08 : BaseSolver
         foreach (var line in _input)
         {
             CharCount += GetCharCount(line);
-            StringCount += line.Length;
+            StringCount += GetStringCount(line);
         }
+
+        _answer1 = CharCount - StringCount;
+    }
+
+    private int GetStringCount(string value)
+    {
+        // trim off the quotes
+        var trimmed = value[1..^1];
+        var result = 0;
+        for (int i = 0; i < trimmed.Length; i++)
+        {
+            if (trimmed[i] == '\\')
+            {
+                if (trimmed[i + 1] == '"' || trimmed[i + 1] == '\\')
+                {
+                    i++;
+                }
+                else if (trimmed[i + 1] == 'x')
+                {
+                    i += 3;
+                }
+            }
+
+            result++;
+        }
+
+        return result;
     }
 
     private int GetCharCount(string value)
     {
         var result = 0;
-        foreach (var character in value)
+        for (int i = 0; i < value.Length; i++)
         {
-            if (character == '\'')
+            if (value[i] == '\\' && value[i + 1] == 'x')
             {
-                result += 4;
+                i += 3;
+                result += 3;
             }
-            else if (character == '\"')
-            {
-                result += 2;
-            }
-            else
-            {
-                result++;
-            }
+
+            result++;
         }
 
-        // Include quotes
-        return result + 2;
+        return result;
     }
 }
