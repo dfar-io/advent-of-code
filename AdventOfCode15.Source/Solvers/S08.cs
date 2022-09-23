@@ -1,6 +1,7 @@
 public class S08 : BaseSolver
 {
     public int CharCount { get; private set; }
+    public int Char2Count { get; private set; }
     public int StringCount { get; private set; }
 
     public S08(string[] input) : base(input)
@@ -8,10 +9,12 @@ public class S08 : BaseSolver
         foreach (var line in _input)
         {
             CharCount += GetCharCount(line);
+            Char2Count += GetChar2Count(line);
             StringCount += GetStringCount(line);
         }
 
         _answer1 = CharCount - StringCount;
+        _answer2 = Char2Count - CharCount;
     }
 
     private int GetStringCount(string value)
@@ -54,5 +57,24 @@ public class S08 : BaseSolver
         }
 
         return result;
+    }
+
+    private int GetChar2Count(string value)
+    {
+        var result = 0;
+        for (int i = 0; i < value.Length; i++)
+        {
+            if (value[i] == '"' || value[i] == '\\')
+            {
+                result += 2;
+            }
+            else
+            {
+                result++;
+            }
+        }
+
+        // Add the quotes
+        return result + 2;
     }
 }
