@@ -1,9 +1,5 @@
 public class S09 : BaseSolver
 {
-    public int CharCount { get; private set; }
-    public int Char2Count { get; private set; }
-    public int StringCount { get; private set; }
-
     public S09(string[] input) : base(input)
     {
         // 1. Create list of distances
