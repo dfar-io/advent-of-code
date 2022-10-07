@@ -5,7 +5,7 @@ namespace AdventOfCode15.Tests;
 
 public class S10Tests
 {
-    //[Test]
+    [Test]
     public void S10()
     {
         var solver = new S10("1113122113");

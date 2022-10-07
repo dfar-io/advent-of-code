@@ -5,7 +5,7 @@ namespace AdventOfCode15.Tests;
 
 public class S03Tests
 {
-    //[Test]
+    [Test]
     [TestCase("^>v<", "4", "3")]
     [TestCase("^v^v^v^v^v", "2", "11")]
     public void Solver03(string input, string answer1, string answer2)

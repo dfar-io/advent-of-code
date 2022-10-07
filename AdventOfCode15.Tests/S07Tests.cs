@@ -5,7 +5,7 @@ namespace AdventOfCode15.Tests;
 
 public class S07Tests
 {
-    //[Test]
+    [Test]
     public void S07P1()
     {
         var input = new string[]

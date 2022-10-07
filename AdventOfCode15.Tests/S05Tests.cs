@@ -5,7 +5,7 @@ namespace AdventOfCode15.Tests;
 
 public class S05Tests
 {
-    //[Test]
+    [Test]
     [TestCase(new string[] { "ugknbfddgicrmopn" }, "1")]
     [TestCase(new string[] { "aaa" }, "1")]
     [TestCase(new string[] { "jchzalrnumimnmhp" }, "0")]
@@ -16,7 +16,7 @@ public class S05Tests
         answer.Should().Be(new S05(input).Answer1);   
     }
 
-    //[Test]
+    [Test]
     [TestCase(new string[] { "qjhvhtzxzqqjkmpb" }, "1")]
     [TestCase(new string[] { "xxyxx" }, "1")]
     [TestCase(new string[] { "uurcxstgmygtbstg" }, "0")]

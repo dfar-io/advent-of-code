@@ -5,7 +5,7 @@ namespace AdventOfCode15.Tests;
 
 public class S02Tests
 {
-    //[Test]
+    [Test]
     [TestCase(new string[] { "2x3x4" }, "58", "34")]
     [TestCase(new string[] { "1x1x10" }, "43", "14")]
     public void Solver02_P1(string[] input, string answer1, string answer2)
