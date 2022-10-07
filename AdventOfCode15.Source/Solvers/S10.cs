@@ -12,7 +12,7 @@ public class S10 : BaseSolver
         }
 
         // To get answer 1, change the rep count to 40
-        _answer2 = result.Length;
+        _answer2 = result.Length.ToString();
     }
 
     private string PerformLookAndSay(string input)

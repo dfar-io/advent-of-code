@@ -8,7 +8,7 @@ public class S07 : BaseSolver
 
         // To get answer 2, change input to use the value of wire a from part 1
         // So <value of a> -> b
-        _answer1 = GetWireValue("a").Value;
+        _answer1 = GetWireValue("a").Value.ToString();
     }
 
     private void ProcessCircuit()

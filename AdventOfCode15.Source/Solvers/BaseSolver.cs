@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 public abstract class BaseSolver
 {
-    protected int _answer1;
-    protected int _answer2;
+    protected string? _answer1;
+    protected string? _answer2;
     protected string[] _input;
-    public int Answer1 => _answer1;
-    public int Answer2 => _answer2;
+    public string Answer1 => _answer1 ?? "";
+    public string Answer2 => _answer2 ?? "";
 
 
     public BaseSolver(string input)

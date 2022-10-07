@@ -15,7 +15,7 @@ public class S09Tests
             "Dublin to Belfast = 141"
         };
         var solver = new S09(input);
-        solver.Answer1.Should().Be(605);
-        solver.Answer2.Should().Be(982);
+        solver.Answer1.Should().Be("605");
+        solver.Answer2.Should().Be("982");
     }
 }

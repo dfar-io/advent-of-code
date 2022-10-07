@@ -2,6 +2,9 @@ public class S09 : BaseSolver
 {
     public S09(string[] input) : base(input)
     {
+        var a1 = 0;
+        var a2 = 0;
+
         // 1. Create list of distances
         var distances = new List<(string D1, string D2, int Distance)>();
         foreach (var distanceString in _input)
@@ -35,17 +38,19 @@ public class S09 : BaseSolver
                 overallDistance += distance.Distance;
             }
 
-            if (_answer1 == 0 || overallDistance < _answer1)
+            if (a1 == 0 || overallDistance < a1)
             {
-                _answer1 = overallDistance;
+                a1 = overallDistance;
             }
 
-            if (_answer2 == 0 || overallDistance > _answer2)
+            if (a2 == 0 || overallDistance > a2)
             {
-                _answer2 = overallDistance;
+                a2 = overallDistance;
             }
         }
 
+        _answer1 = a1.ToString();
+        _answer2 = a2.ToString();
     }
 
     // https://stackoverflow.com/a/10630026

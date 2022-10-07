@@ -4,6 +4,8 @@ public class S06 : BaseSolver
     {
         var lights = new bool[1000,1000];
         var lightsP2 = new int[1000,1000];
+        var a1 = 0;
+        var a2 = 0;
 
         foreach (var commandString in _input)
         {
@@ -28,11 +30,14 @@ public class S06 : BaseSolver
             {
                 if (lights[i, j])
                 {
-                    _answer1++;
+                    a1++;
                 }
-                _answer2 += lightsP2[i, j];
+                a2 += lightsP2[i, j];
             }
         }
+
+        _answer1 = a1.ToString();
+        _answer2 = a2.ToString();
     }
 
     private static void ToggleLights(bool[,] lights, Command command)

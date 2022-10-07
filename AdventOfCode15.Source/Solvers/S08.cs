@@ -13,8 +13,8 @@ public class S08 : BaseSolver
             StringCount += GetStringCount(line);
         }
 
-        _answer1 = CharCount - StringCount;
-        _answer2 = Char2Count - CharCount;
+        _answer1 = (CharCount - StringCount).ToString();
+        _answer2 = (Char2Count - CharCount).ToString();
     }
 
     private int GetStringCount(string value)

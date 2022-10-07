@@ -8,13 +8,13 @@ public class S04 : BaseSolver
         while (true)
         {
             var hash = GetHash($"{_input[0]}{x}");
-            if (hash.StartsWith("00000") && _answer1 == 0)
+            if (hash.StartsWith("00000") && _answer1 == null)
             {
-                _answer1 = x;
+                _answer1 = x.ToString();
             }
             if (hash.StartsWith("000000"))
             {
-                _answer2 = x;
+                _answer2 = x.ToString();
                 break;
             }
 

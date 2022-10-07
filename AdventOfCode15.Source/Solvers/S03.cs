@@ -41,8 +41,8 @@ public class S03 : BaseSolver
             ModifyLocation(ref x, ref y, direction);
             _visited.Add((x, y));
 
-            _answer1 = _visited.Count();
-            _answer2 = _roboVisited.Union(_nonRoboVisited).Count();;
+            _answer1 = _visited.Count().ToString();
+            _answer2 = _roboVisited.Union(_nonRoboVisited).Count().ToString();
         }
     }
 
