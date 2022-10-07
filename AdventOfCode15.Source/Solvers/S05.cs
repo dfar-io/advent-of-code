@@ -4,18 +4,22 @@ public class S05 : BaseSolver
 {
     public S05(string[] input) : base(input)
     {
+        var a1Count = 0;
+        var a2Count = 0;
         foreach (var value in _input)
         {
             if (IsNiceString(value))
             {
-                _answer1++;
+                a1Count++;
             }
 
             if (IsNiceStringP2(value))
             {
-                _answer2++;
+                a2Count++;
             }
         }
+        _answer1 = a1Count.ToString();
+        _answer2 = a2Count.ToString();
     }
 
     private bool IsNiceString(string value)

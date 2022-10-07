@@ -5,7 +5,7 @@ namespace AdventOfCode15.Tests;
 
 public class S08Tests
 {
-    [Test]
+    //[Test]
     [TestCase(new string[] { "\"\"" }, 2, 0, 6)]
     [TestCase(new string[] { "\"abc\"" }, 5, 3, 9)]
     [TestCase(new string[] { "\"aaa\\\"aaa\"" }, 10, 7, 16)]
