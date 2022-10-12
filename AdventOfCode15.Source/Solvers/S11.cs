@@ -44,9 +44,7 @@ public class S11 : BaseSolver
     private bool IsPasswordValid(string password)
     {
         if (password.Contains("i") || password.Contains("o") || password.Contains("l"))
-        {
             return false;
-        }
 
         var hasStraight = false;
         var pairCount = 0;
