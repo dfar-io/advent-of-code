@@ -22,11 +22,13 @@ public class S12 : BaseSolver
     {
         if (jsonObject.Type == JTokenType.Array)
         {
+            var arraySum = 0;
             // This needs to go through all array objects
             foreach (var arrayObject in jsonObject)
             {
-                return Process(arrayObject);
+                arraySum += Process(arrayObject);
             }
+            return arraySum;
             //return Process(jsonObject.First 
             //    ?? throw new Exception("no first jsonObject in array"));
         }
