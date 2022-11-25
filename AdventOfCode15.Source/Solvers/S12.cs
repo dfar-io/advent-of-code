@@ -15,6 +15,7 @@ public class S12 : BaseSolver
             sum += Process(jsonObject);
         }
 
+        // 10766 is too low
         _answer1 = sum.ToString();
     }
 
@@ -23,14 +24,11 @@ public class S12 : BaseSolver
         if (jsonObject.Type == JTokenType.Array)
         {
             var arraySum = 0;
-            // This needs to go through all array objects
             foreach (var arrayObject in jsonObject)
             {
                 arraySum += Process(arrayObject);
             }
             return arraySum;
-            //return Process(jsonObject.First 
-            //    ?? throw new Exception("no first jsonObject in array"));
         }
         else if (jsonObject.Type == JTokenType.Integer)
         {
@@ -51,9 +49,12 @@ public class S12 : BaseSolver
         }
         else if (jsonObject.Type == JTokenType.Object)
         {
-            // Will need to go through all potential objects
-            return Process(jsonObject.First
-                ?? throw new Exception("no first jsonObject in object"));
+            var objectSum = 0;
+            foreach (var objectObject in jsonObject)
+            {
+                objectSum += Process(objectObject);
+            }
+            return objectSum;
         }
 
         return 0;
