@@ -15,7 +15,7 @@ public class S12 : BaseSolver
             sum += Process(jsonObject);
         }
 
-        // 10766 is too low
+        //remove the section commented below to get answer 1
         _answer1 = sum.ToString();
     }
 
@@ -52,6 +52,18 @@ public class S12 : BaseSolver
             var objectSum = 0;
             foreach (var objectObject in jsonObject)
             {
+                // checks for "red" - remove this to get answer 1
+                if (objectObject.Type == JTokenType.Property)
+                {
+                    var property = objectObject.Value<JProperty>()
+                        ?? throw new Exception("unable to cast into JProperty");
+                    if (property.Value.Type == JTokenType.String &&
+                        property.Value.Value<string>() == "red")
+                    {
+                        return 0;
+                    }
+                }
+
                 objectSum += Process(objectObject);
             }
             return objectSum;
