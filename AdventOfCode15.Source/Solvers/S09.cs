@@ -25,7 +25,7 @@ public class S09 : BaseSolver
         }
 
         // 3. Get permutations, find shortest distance
-        var permutations = GetPermutations(locations, locations.Count());
+        var permutations = PermutationGenerator.Generate(locations, locations.Count());
         foreach (var permutation in permutations)
         {
             var overallDistance = 0;
@@ -51,16 +51,5 @@ public class S09 : BaseSolver
 
         _answer1 = a1.ToString();
         _answer2 = a2.ToString();
-    }
-
-    // https://stackoverflow.com/a/10630026
-    private static IEnumerable<IEnumerable<string>> GetPermutations(
-        IEnumerable<string> list, int length)
-    {
-        if (length == 1) return list.Select(t => new string[] { t });
-
-        return GetPermutations(list, length - 1)
-            .SelectMany(t => list.Where(e => !t.Contains(e)),
-                (s1, s2) => s1.Concat(new string[] { s2 }));
     }
 }
