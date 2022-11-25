@@ -21,54 +21,49 @@ public class S12 : BaseSolver
 
     private int Process(JToken jsonObject)
     {
-        if (jsonObject.Type == JTokenType.Array)
+        switch (jsonObject.Type)
         {
-            var arraySum = 0;
-            foreach (var arrayObject in jsonObject)
-            {
-                arraySum += Process(arrayObject);
-            }
-            return arraySum;
-        }
-        else if (jsonObject.Type == JTokenType.Integer)
-        {
-            return jsonObject.Value<int>();
-        }
-        else if (jsonObject.Type == JTokenType.Property)
-        {
-            var property = jsonObject.Value<JProperty>()
-                ?? throw new Exception("unable to cast into JProperty");
-            if (property.Value.Type == JTokenType.Integer)
-            {
-                return property.Value.Value<int>();
-            }
-            else
-            {
-                return Process(property.Value);
-            }
-        }
-        else if (jsonObject.Type == JTokenType.Object)
-        {
-            var objectSum = 0;
-            foreach (var objectObject in jsonObject)
-            {
-                // checks for "red" - remove this to get answer 1
-                if (objectObject.Type == JTokenType.Property)
+            case JTokenType.Array:
+                var arraySum = 0;
+                foreach (var arrayObject in jsonObject)
                 {
-                    var property = objectObject.Value<JProperty>()
-                        ?? throw new Exception("unable to cast into JProperty");
-                    if (property.Value.Type == JTokenType.String &&
-                        property.Value.Value<string>() == "red")
-                    {
-                        return 0;
-                    }
+                    arraySum += Process(arrayObject);
                 }
+                return arraySum;
+            case JTokenType.Integer:
+                return jsonObject.Value<int>();
+            case JTokenType.Property:
+                var property = jsonObject.Value<JProperty>()
+                    ?? throw new Exception("unable to cast into JProperty");
+                if (property.Value.Type == JTokenType.Integer)
+                {
+                    return property.Value.Value<int>();
+                }
+                else
+                {
+                    return Process(property.Value);
+                }
+            case JTokenType.Object:
+                var objectSum = 0;
+                foreach (var objectObject in jsonObject)
+                {
+                    // checks for "red" - remove this to get answer 1
+                    if (objectObject.Type == JTokenType.Property)
+                    {
+                        var objProp = objectObject.Value<JProperty>()
+                            ?? throw new Exception("cannot cast to JProperty");
+                        if (objProp.Value.Type == JTokenType.String &&
+                            objProp.Value.Value<string>() == "red")
+                        {
+                            return 0;
+                        }
+                    }
 
-                objectSum += Process(objectObject);
-            }
-            return objectSum;
+                    objectSum += Process(objectObject);
+                }
+                return objectSum;
+            default:
+                return 0;
         }
-
-        return 0;
     }
 }
