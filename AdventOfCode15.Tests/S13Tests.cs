@@ -23,6 +23,6 @@ public class S13Tests
             "David would gain 41 happiness units by sitting next to Carol."
         };
         var solver = new S13(data);
-        solver.Answer1.Should().Be("330");
+        solver.Answer1.Should().Be("286");
     }
 }
