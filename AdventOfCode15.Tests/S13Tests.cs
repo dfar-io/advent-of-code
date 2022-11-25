@@ -6,7 +6,7 @@ namespace AdventOfCode15.Tests;
 public class S13Tests
 {
     [Test]
-    public void S13(string input, int answer)
+    public void S13()
     {
         var data = new string[] {
             "Alice would gain 54 happiness units by sitting next to Bob.",
