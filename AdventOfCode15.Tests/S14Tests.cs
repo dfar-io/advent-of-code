@@ -14,6 +14,7 @@ public class S14Tests
         };
         var solver = new S14(data, 1000);
         solver.Answer1.Should().Be("1120");
+        solver.Answer2.Should().Be("689");
     }
 
     [Test]

@@ -6,24 +6,28 @@ public class S14 : BaseSolver
     public S14(string[] input, int raceDistance) : base(input)
     {
         var reindeerData = new List<Reindeer>();
-        var furthestDistance = 0;
 
         foreach (var inputLine in _input)
         {
             reindeerData.Add(new Reindeer(inputLine));
         }
 
-        foreach (var reindeer in reindeerData)
+        for (var i = 0; i < raceDistance; i++)
         {
-            for (var i = 0; i < raceDistance; i++)
-            {
-                reindeer.Tick();
-            }
+            reindeerData.ForEach(r => r.Tick());
 
-            if (reindeer.Distance > furthestDistance) { furthestDistance = reindeer.Distance; }
+            var furthestDistance = reindeerData.Max(r => r.Distance);
+            foreach (var reindeer in reindeerData)
+            {
+                if (reindeer.Distance >= furthestDistance)
+                {
+                    reindeer.AddPoint();
+                }
+            }
         }
 
-        _answer1 = furthestDistance.ToString();
+        _answer1 = reindeerData.Max(r => r.Distance).ToString();
+        _answer2 = reindeerData.Max(r => r.Points).ToString();
     }
 }
 
@@ -34,7 +38,7 @@ class Reindeer
     private int _flyDurationRemaining;
     private int _restDuration;
     private int _restDurationRemaining;
-    
+
     public int Points { get; private set; }
     public int Distance { get; private set; }
 
