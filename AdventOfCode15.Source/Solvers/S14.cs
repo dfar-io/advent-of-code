@@ -39,8 +39,9 @@ public class S14 : BaseSolver
                     continue;
                 }
 
-                flyDurationRemaining = reindeer.FlyDuration;
+                flyDurationRemaining = reindeer.FlyDuration - 1;
                 restDurationRemaining = reindeer.RestDuration;
+                distance += reindeer.Speed;
             }
 
             if (distance > furthestDistance) { furthestDistance = distance; }
