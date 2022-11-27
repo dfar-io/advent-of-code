@@ -25,6 +25,6 @@ public class S14Tests
             "Dancer can fly 1 km/s for 5 seconds, but then must rest for 200 seconds."
         };
         var solver = new S14(data, 263);
-        solver.Answer1.Should().Be("278");
+        solver.Answer1.Should().Be("280");
     }
 }

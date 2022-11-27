@@ -5,49 +5,72 @@ public class S14 : BaseSolver
 
     public S14(string[] input, int raceDistance) : base(input)
     {
-        var reindeerData = new List<(int Speed, int FlyDuration, int RestDuration)>();
+        var reindeerData = new List<Reindeer>();
         var furthestDistance = 0;
 
         foreach (var inputLine in _input)
         {
-            var parts = inputLine.Split(" ");
-            var speed = int.Parse(parts[3]);
-            var flyDuration = int.Parse(parts[6]);
-            var restDuration = int.Parse(parts[13]);
-
-            reindeerData.Add((speed, flyDuration, restDuration));
+            reindeerData.Add(new Reindeer(inputLine));
         }
 
         foreach (var reindeer in reindeerData)
         {
-            var flyDurationRemaining = reindeer.FlyDuration;
-            var restDurationRemaining = reindeer.RestDuration;
-            var distance = 0;
-            
             for (var i = 0; i < raceDistance; i++)
             {
-                if (flyDurationRemaining > 0)
-                {
-                    flyDurationRemaining--;
-                    distance += reindeer.Speed;
-                    continue;
-                }
-                
-                if (restDurationRemaining > 0)
-                {
-                    restDurationRemaining--;
-                    continue;
-                }
-
-                flyDurationRemaining = reindeer.FlyDuration - 1;
-                restDurationRemaining = reindeer.RestDuration;
-                distance += reindeer.Speed;
+                reindeer.Tick();
             }
 
-            if (distance > furthestDistance) { furthestDistance = distance; }
+            if (reindeer.Distance > furthestDistance) { furthestDistance = reindeer.Distance; }
         }
 
-        // between 2640 and 2800
         _answer1 = furthestDistance.ToString();
+    }
+}
+
+class Reindeer
+{
+    private int _speed;
+    private int _flyDuration;
+    private int _flyDurationRemaining;
+    private int _restDuration;
+    private int _restDurationRemaining;
+    
+    public int Points { get; private set; }
+    public int Distance { get; private set; }
+
+    public Reindeer(string input)
+    {
+        var parts = input.Split(" ");
+        _speed = int.Parse(parts[3]);
+        _flyDuration = int.Parse(parts[6]);
+        _restDuration = int.Parse(parts[13]);
+
+        _flyDurationRemaining = _flyDuration;
+        _restDurationRemaining = _restDuration;
+    }
+
+    public void Tick()
+    {
+        if (_flyDurationRemaining > 0)
+        {
+            _flyDurationRemaining--;
+            Distance += _speed;
+            return;
+        }
+                
+        if (_restDurationRemaining > 0)
+        {
+            _restDurationRemaining--;
+            return;
+        }
+
+        _flyDurationRemaining = _flyDuration - 1;
+        _restDurationRemaining = _restDuration;
+        Distance += _speed;
+    }
+
+    public void AddPoint()
+    {
+        Points++;
     }
 }
