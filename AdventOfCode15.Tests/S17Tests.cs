@@ -13,5 +13,6 @@ public class S17Tests
         };
         var solver = new S17(data, 25);
         solver.Answer1.Should().Be("4");
+        solver.Answer2.Should().Be("3");
     }
 }
