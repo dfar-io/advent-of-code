@@ -1,8 +1,6 @@
 public class S17 : BaseSolver
 {
-    public S17(string[] input) : this(input, 150) {}
-
-    public S17(string[] input, int eggNogAmount) : base(input)
+    public S17(string[] input, int eggNogAmount = 150) : base(input)
     {
         var bitCount = Math.Pow(2, input.Length);
         var availableCombinations = 0;
