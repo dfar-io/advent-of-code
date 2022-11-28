@@ -9,13 +9,15 @@ public class S16Tests
     public void S16()
     {
         var data = new string[] {
-            "Sue 369: trees: 1, goldfish: 8, cars: 8",
-            "Sue 370: vizslas: 0, cars: 2, perfumes: 5",
-            "Sue 371: trees: 2, cars: 3, vizslas: 8",
-            "Sue 372: trees: 10, children: 9, cats: 1",
-            "Sue 373: pomeranians: 3, perfumes: 1, vizslas: 0"
+            "Sue 258: cats: 7, trees: 0, vizslas: 1",
+            "Sue 259: perfumes: 7, cars: 7, akitas: 7",
+            "Sue 260: goldfish: 0, vizslas: 0, samoyeds: 2",
+            "Sue 261: vizslas: 2, children: 2, cats: 3",
+            "Sue 262: vizslas: 2, pomeranians: 9, samoyeds: 3",
+            "Sue 263: cats: 1, akitas: 3, vizslas: 1",
+            "Sue 264: pomeranians: 10, trees: 2, goldfish: 7"
         };
         var solver = new S16(data);
-        solver.Answer1.Should().Be("373");
+        solver.Answer2.Should().Be("260");
     }
 }
