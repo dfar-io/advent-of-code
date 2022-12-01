@@ -47,10 +47,7 @@ public class S18 : BaseSolver
     {
         // for part 2, we need to keep the corners on,
         // remove this to get answer 1
-        if ((x == 0 && y == 0) ||
-            (x == 0 && y == _currentState.GetLength(1) - 1) ||
-            (x == _currentState.GetLength(0) - 1 && y == 0) ||
-            (x == _currentState.GetLength(0) - 1 && y == _currentState.GetLength(1) - 1))
+        if (IsCorner(x, y))
         {
             return true;
         }
@@ -73,6 +70,14 @@ public class S18 : BaseSolver
             3 => true,
             _ => false
         };
+    }
+
+    private bool IsCorner(int x, int y)
+    {
+        return (x == 0 && y == 0) ||
+                    (x == 0 && y == _currentState.GetLength(1) - 1) ||
+                    (x == _currentState.GetLength(0) - 1 && y == 0) ||
+                    (x == _currentState.GetLength(0) - 1 && y == _currentState.GetLength(1) - 1);
     }
 
     private bool GetValue(int x, int y)
