@@ -9,6 +9,8 @@ public class S19Tests
     public void S19()
     {
         var data = new string[] {
+            "e => H",
+            "e => O",
             "H => HO",
             "H => OH",
             "O => HH",
