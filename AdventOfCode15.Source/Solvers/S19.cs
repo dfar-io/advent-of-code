@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 
 public class S19 : BaseSolver
@@ -37,7 +38,23 @@ public class S19 : BaseSolver
             }
         }
 
-        // 189 too low, need to collect 
+        // For answer 2, doing something pretty different, going to try going
+        // backwards and forming the initial molecule from the final one
+        var sortedReplacements = replacements.OrderByDescending(x => x.Value.Length);
+        var stepCount = 0;
+        var sb = new StringBuilder(initialMolecule);
+        while (sb.ToString() != "e")
+        {
+            foreach (var replacement in sortedReplacements)
+            {
+                int count = Regex.Matches(sb.ToString(), replacement.Value).Count;
+                stepCount += count;
+
+                sb.Replace(replacement.Value, replacement.Key);
+            }
+        }
+        
         _answer1 = molecules.Count().ToString();
+        _answer2 = stepCount.ToString();
     }
 }

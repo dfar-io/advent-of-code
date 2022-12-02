@@ -17,5 +17,6 @@ public class S19Tests
         };
         var solver = new S19(data);
         solver.Answer1.Should().Be("4");
+        solver.Answer2.Should().Be("3");
     }
 }
