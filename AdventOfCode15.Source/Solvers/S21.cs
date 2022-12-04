@@ -5,51 +5,33 @@ public class S21 : BaseSolver
     private readonly double _bossArmor;
 
     // Calculated these manually
-    private Dictionary<int, int> minDamageCosts = new Dictionary<int, int>()
+    private Dictionary<int, (int min, int max)> damageCosts = new Dictionary<int, (int min, int max)>()
     {
-        [4] = 8,
-        [5] = 10,
-        [6] = 25,
-        [7] = 40,
-        [8] = 65,
-        [9] = 90,
-        [10] = 115,
-        [11] = 149,
-        [12] = 190,
-        [13] = 224,
+        [4] = (8, 8),
+        [5] = (10, 33),
+        [6] = (25, 58),
+        [7] = (40, 108),
+        [8] = (65, 130),
+        [9] = (90, -1),
+        [10] = (115, -1),
+        [11] = (149, -1),
+        [12] = (190, -1),
+        [13] = (224, -1)
     };
 
-    private Dictionary<int, int> minArmorCosts = new Dictionary<int, int>()
+    private Dictionary<int, (int min, int max)> armorCosts = new Dictionary<int, (int min, int max)>()
     {
-        [0] = 0,
-        [1] = 13,
-        [2] = 31,
-        [3] = 53,
-        [4] = 71,
-        [5] = 91,
-        [6] = 113,
-        [7] = 135,
-        [8] = 162,
-        [9] = 195,
-        [10] = 222,
-    };
-
-    private Dictionary<int, int> maxDamageCosts = new Dictionary<int, int>()
-    {
-        [4] = 8,
-        [5] = 33,
-        [6] = 58,
-        [7] = 108,
-        [8] = 133
-    };
-
-    private Dictionary<int, int> maxArmorCosts = new Dictionary<int, int>()
-    {
-        [0] = 0,
-        [2] = 40,
-        [3] = 80,
-        [4] = 100,
-        [5] = 120
+        [0] = (0, 0),
+        [1] = (13, -1),
+        [2] = (31, 40),
+        [3] = (53, 80),
+        [4] = (71, 100),
+        [5] = (91, 120),
+        [6] = (113, -1),
+        [7] = (135, -1),
+        [8] = (162, -1),
+        [9] = (195, -1),
+        [10] = (222, -1)
     };
 
     public S21(string[] input) : this(input, 100) {}
@@ -80,10 +62,11 @@ public class S21 : BaseSolver
         }
 
         var minimumGold = int.MaxValue;
+        var maximumLosingGold = 0;
         foreach (var winningValue in winningValues)
         {
-            var damageCost = minDamageCosts[winningValue.damage];
-            var armorCost = minArmorCosts[winningValue.armor];
+            var damageCost = damageCosts[winningValue.damage].min;
+            var armorCost = armorCosts[winningValue.armor].min;
             var result = damageCost + armorCost;
             if (result < minimumGold)
             {
@@ -91,11 +74,11 @@ public class S21 : BaseSolver
             }
         }
 
-        var maximumLosingGold = 0;
+        
         foreach (var losingValue in losingValues)
         {
-            var damageCost = maxDamageCosts[losingValue.damage];
-            var armorCost = maxArmorCosts[losingValue.armor];
+            var damageCost = damageCosts[losingValue.damage].max;
+            var armorCost = armorCosts[losingValue.armor].max;
             var result = damageCost + armorCost;
             if (result > maximumLosingGold)
             {
@@ -104,7 +87,6 @@ public class S21 : BaseSolver
         }
 
         _answer1 = minimumGold.ToString();
-        // not 99 or 128, too low
         _answer2 = maximumLosingGold.ToString();
     }
 
