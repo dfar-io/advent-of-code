@@ -50,12 +50,9 @@ public class S19 : BaseSolver
                 var index = sb.ToString().LastIndexOf(replacement.Value);
                 if (index >= 0)
                 {
-                    // is it this statement?
-                    //sb.Replace(replacement.Value, replacement.Key, index, replacement.Value.Length);
                     sb.Remove(index, replacement.Value.Length);
                     sb.Insert(index, replacement.Key);
                     stepCount++;
-                    break;
                 }
             }
         }
