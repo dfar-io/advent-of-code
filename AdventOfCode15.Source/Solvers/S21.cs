@@ -46,17 +46,12 @@ public class S21 : BaseSolver
         var turnsToLose = FindTurnsToLose(playerHitPoints);
 
         var winningValues = new List<(int damage, int armor)>();
-        var losingValues = new List<(int damage, int armor)>();
         for (int i = 0; i < turnsToWin.Length; i++)
         {
             var winningTurnCount = turnsToWin[i];
             if (winningTurnCount == -1) continue;
 
             var minimumArmor = Array.FindIndex(turnsToLose, x => x >= winningTurnCount);
-            if (minimumArmor > 0)
-            {
-                losingValues.Add((i, minimumArmor - 1));
-            }
 
             winningValues.Add((i, minimumArmor));
         }
@@ -65,24 +60,24 @@ public class S21 : BaseSolver
         var maximumLosingGold = 0;
         foreach (var winningValue in winningValues)
         {
+            // process losing value
+            if (winningValue.armor > 0)
+            {
+                var maxDamageCost = damageCosts[winningValue.damage].max;
+                var maxArmorCost = armorCosts[winningValue.armor - 1].max;
+                var maxResult = maxDamageCost + maxArmorCost;
+                if (maxResult > maximumLosingGold)
+                {
+                    maximumLosingGold = maxResult;
+                }
+            }
+
             var damageCost = damageCosts[winningValue.damage].min;
             var armorCost = armorCosts[winningValue.armor].min;
             var result = damageCost + armorCost;
             if (result < minimumGold)
             {
                 minimumGold = result;
-            }
-        }
-
-        
-        foreach (var losingValue in losingValues)
-        {
-            var damageCost = damageCosts[losingValue.damage].max;
-            var armorCost = armorCosts[losingValue.armor].max;
-            var result = damageCost + armorCost;
-            if (result > maximumLosingGold)
-            {
-                maximumLosingGold = result;
             }
         }
 
