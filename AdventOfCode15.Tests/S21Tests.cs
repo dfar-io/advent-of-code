@@ -15,6 +15,6 @@ public class S21Tests
             "Armor: 2"
         }, 8);
         solver.Answer1.Should().Be("65");
-        solver.Answer2.Should().Be("65");
+        solver.Answer2.Should().Be("188");
     }
 }
