@@ -74,24 +74,12 @@ public class S07 : BaseSolver
         int value1 = 0, value2 = 0;
 
         ushort.TryParse(instruction.SourceWire1.ToString(), out ushort v1);
-        if (v1 != 0)
-        {
-            value1 = v1;
-        }
-        else if (WireValueExists(instruction.SourceWire1))
-        {
-            value1 = GetWireValue(instruction.SourceWire1);
-        }
+        if (v1 != 0) { value1 = v1; }
+        else if (WireValueExists(instruction.SourceWire1)) { value1 = GetWireValue(instruction.SourceWire1); }
 
         ushort.TryParse(instruction.SourceWire2.ToString(), out ushort v2);
-        if (v2 != 0)
-        {
-            value2 = v2;
-        }
-        else if (WireValueExists(instruction.SourceWire2))
-        {
-            value2 = GetWireValue(instruction.SourceWire2);
-        }
+        if (v2 != 0) { value2 = v2; }
+        else if (WireValueExists(instruction.SourceWire2)) { value2 = GetWireValue(instruction.SourceWire2); }
 
         if (value1 != 0 && value2 != 0)
         {
@@ -101,10 +89,7 @@ public class S07 : BaseSolver
 
     private void ProcessShift(Instruction instruction, Operator op)
     {
-        if (!WireValueExists(instruction.SourceWire1))
-        {
-            return;
-        }
+        if (!WireValueExists(instruction.SourceWire1)) { return; }
 
         var value = GetWireValue(instruction.SourceWire1);
         var shiftValue = instruction.ShiftValue;
