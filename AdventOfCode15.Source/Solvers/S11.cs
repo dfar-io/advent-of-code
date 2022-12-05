@@ -55,10 +55,7 @@ public class S11 : BaseSolver
 
         for (int i = 0; i < password.Length - 1; i++)
         {
-            if (!hasStraight && i < password.Length - 2 && password[i] + 1 == password[i + 1] && password[i] + 2 == password[i + 2])
-            {
-                hasStraight = true;
-            }
+            hasStraight = HasStraight(password, hasStraight, i);
 
             if (password[i] == password[i + 1] && !previousPair)
             {
@@ -72,5 +69,10 @@ public class S11 : BaseSolver
         }
 
         return hasStraight && pairCount > 1;
+    }
+
+    private static bool HasStraight(string password, bool hasStraight, int i)
+    {
+        return !hasStraight && i < password.Length - 2 && password[i] + 1 == password[i + 1] && password[i] + 2 == password[i + 2];
     }
 }

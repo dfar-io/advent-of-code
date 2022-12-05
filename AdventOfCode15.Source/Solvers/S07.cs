@@ -47,35 +47,14 @@ public class S07 : BaseSolver
         {
             foreach (var instruction in instructions)
             {
-                if (_wires.Any(w => w.Wire == instruction.DestinationWire))
-                {
-                    continue;
-                }
+                if (_wires.Any(w => w.Wire == instruction.DestinationWire)) { continue; }
 
-                if (instruction.Operator == Operator.DIRECT)
-                {
-                    ProcessDirect(instruction);
-                }
-                else if (instruction.Operator == Operator.NOT)
-                {
-                    ProcessNot(instruction);
-                }
-                else if (instruction.Operator == Operator.LSHIFT)
-                {
-                    ProcessShift(instruction, Operator.LSHIFT);
-                }
-                else if (instruction.Operator == Operator.RSHIFT)
-                {
-                    ProcessShift(instruction, Operator.RSHIFT);
-                }
-                else if (instruction.Operator == Operator.AND)
-                {
-                    ProcessAnd(instruction);
-                }
-                else if (instruction.Operator == Operator.OR)
-                {
-                    ProcessOr(instruction);
-                }
+                if (instruction.Operator == Operator.DIRECT) { ProcessDirect(instruction); }
+                else if (instruction.Operator == Operator.NOT) { ProcessNot(instruction); }
+                else if (instruction.Operator == Operator.LSHIFT) { ProcessShift(instruction, Operator.LSHIFT); }
+                else if (instruction.Operator == Operator.RSHIFT) { ProcessShift(instruction, Operator.RSHIFT); }
+                else if (instruction.Operator == Operator.AND) { ProcessAnd(instruction); }
+                else if (instruction.Operator == Operator.OR) { ProcessOr(instruction); }
             }
         }
     }
