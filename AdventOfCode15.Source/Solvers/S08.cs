@@ -1,13 +1,15 @@
 public class S08 : BaseSolver
 {
     public int CharCount { get; private set; }
+
     public int Char2Count { get; private set; }
+
     public int StringCount { get; private set; }
 
     public S08(string[] input)
         : base(input)
     {
-        foreach (var line in _input)
+        foreach (var line in Input)
         {
             CharCount += GetCharCount(line);
             Char2Count += GetChar2Count(line);

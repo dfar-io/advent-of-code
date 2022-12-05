@@ -57,7 +57,7 @@ public class S19 : BaseSolver
                 }
             }
         }
-        
+
         Answer1 = molecules.Count().ToString();
         Answer2 = stepCount.ToString();
     }

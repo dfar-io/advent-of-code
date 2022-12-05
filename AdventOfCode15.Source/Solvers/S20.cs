@@ -8,7 +8,7 @@ public class S20 : BaseSolver
             // for answer 1, use 10
             // int presents = GetFactors(i).Sum() * 10;
             int presents = GetFactors(i).Where(f => f * 50 >= i).Sum() * 11;
-            if (presents >= int.Parse(_input[0]))
+            if (presents >= int.Parse(Input[0]))
             {
                 Answer1 = i.ToString();
                 break;

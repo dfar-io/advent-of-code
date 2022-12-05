@@ -1,9 +1,10 @@
 public class S16 : BaseSolver
 {
-    public S16(string[] input) : base(input)
+    public S16(string[] input)
+        : base(input)
     {
         var data = new List<Sue>();
-        foreach (var line in _input)
+        foreach (var line in Input)
         {
             var parts = line.Split(" ");
             var number = int.Parse(parts[1].TrimEnd(':'));
@@ -40,9 +41,6 @@ public class S16 : BaseSolver
 
     private class Sue
     {
-        public int Number { get; private set; }
-        public Dictionary<string, int> Properties { get; private set; }
-
         public Sue(int number, string prop1, int prop1Value, string prop2, int prop2Value, string prop3, int prop3Value)
         {
             Number = number;
@@ -52,10 +50,17 @@ public class S16 : BaseSolver
             Properties.Add(prop3, prop3Value);
         }
 
+        public int Number { get; private set; }
+
+        public Dictionary<string, int> Properties { get; private set; }
+
         public bool HasMismatchingProperty(string propName, int value)
         {
             var propValue = GetPropertyValue(propName);
-            if (propValue == -1) { return false; }
+            if (propValue == -1)
+            {
+                return false;
+            }
 
             return propValue != value;
         }
@@ -74,14 +79,18 @@ public class S16 : BaseSolver
         public bool HasGreaterThanOrEqualProperty(string propName, int value)
         {
             var propValue = GetPropertyValue(propName);
-            if (propValue == -1) { return false; }
+            if (propValue == -1)
+            {
+                return false;
+            }
 
             return propValue >= value;
         }
 
         private int GetPropertyValue(string propName)
         {
-            if (!Properties.TryGetValue(propName, out var value)) {
+            if (!Properties.TryGetValue(propName, out var value))
+            {
                 return -1;
             }
 

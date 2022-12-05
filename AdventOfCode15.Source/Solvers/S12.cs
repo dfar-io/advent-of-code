@@ -7,7 +7,7 @@ public class S12 : BaseSolver
         : base(input)
     {
         var sum = 0;
-        var jsonString = _input[0];
+        var jsonString = Input[0];
         dynamic json = JsonConvert.DeserializeObject(jsonString)
             ?? throw new Exception("No jsonString passed in.");
 

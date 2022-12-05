@@ -5,7 +5,7 @@ public class S02 : BaseSolver
     public S02(string[] input)
         : base(input)
     {
-        foreach (var dimensions in _input)
+        foreach (var dimensions in Input)
         {
             var dim = dimensions.Split('x');
             var length = int.Parse(dim[0]);

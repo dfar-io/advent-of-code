@@ -7,7 +7,7 @@ public class S05 : BaseSolver
     {
         var a1Count = 0;
         var a2Count = 0;
-        foreach (var value in _input)
+        foreach (var value in Input)
         {
             if (IsNiceString(value))
             {

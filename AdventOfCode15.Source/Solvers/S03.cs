@@ -25,7 +25,7 @@ public class S03 : BaseSolver
         _nonRoboVisited.Add((nonRoboX, nonRoboY));
         _roboVisited.Add((roboX, roboY));
 
-        foreach (var direction in _input[0])
+        foreach (var direction in Input[0])
         {
             if (isSantasTurn)
             {

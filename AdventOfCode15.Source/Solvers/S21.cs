@@ -42,9 +42,9 @@ public class S21 : BaseSolver
     public S21(string[] input, double playerHitPoints)
         : base(input)
     {
-        _bossHp = double.Parse(_input[0].Split(": ")[1]);
-        _bossDamage = double.Parse(_input[1].Split(": ")[1]);
-        _bossArmor = double.Parse(_input[2].Split(": ")[1]);
+        _bossHp = double.Parse(Input[0].Split(": ")[1]);
+        _bossDamage = double.Parse(Input[1].Split(": ")[1]);
+        _bossArmor = double.Parse(Input[2].Split(": ")[1]);
 
         var turnsToWin = FindTurnsToWin();
         var turnsToLose = FindTurnsToLose(playerHitPoints);
@@ -53,7 +53,10 @@ public class S21 : BaseSolver
         for (int i = 0; i < turnsToWin.Length; i++)
         {
             var winningTurnCount = turnsToWin[i];
-            if (winningTurnCount == -1) { continue; }
+            if (winningTurnCount == -1)
+            {
+                continue;
+            }
 
             var minimumArmor = Array.FindIndex(turnsToLose, x => x >= winningTurnCount);
 

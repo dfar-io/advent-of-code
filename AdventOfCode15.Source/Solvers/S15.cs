@@ -1,9 +1,10 @@
 public class S15 : BaseSolver
 {
-    public S15(string[] input) : base(input)
+    public S15(string[] input)
+        : base(input)
     {
         var data = new List<(int Capacity, int Durability, int Flavor, int Texture, int Calories)>();
-        foreach (var inputLine in _input)
+        foreach (var inputLine in Input)
         {
             var parts = inputLine.Split(" ");
             var capacity = int.Parse(parts[2].TrimEnd(','));

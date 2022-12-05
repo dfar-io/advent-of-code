@@ -16,8 +16,8 @@ public class S22 : BaseSolver
         : base(input)
     {
         _isPlayerWinner = null;
-        _bossHp = int.Parse(_input[0].Split(": ")[1]);
-        var bossDamage = int.Parse(_input[1].Split(": ")[1]);
+        _bossHp = int.Parse(Input[0].Split(": ")[1]);
+        var bossDamage = int.Parse(Input[1].Split(": ")[1]);
 
         _playerHp = 50;
         _playerMana = 500;
@@ -83,9 +83,7 @@ public class S22 : BaseSolver
 
     private void Upkeep()
     {
-        // part 2
-        // _playerHp--;
-
+        // part 2 _playerHp--;
         if (_playerHp <= 0 || _playerMana <= 0)
         {
             _isPlayerWinner = false;

@@ -6,7 +6,7 @@ public class S13 : BaseSolver
         var attendees = new HashSet<string>();
         var data = new List<(string Name1, int Change, string Name2)>();
 
-        foreach (var inputLine in _input)
+        foreach (var inputLine in Input)
         {
             var parts = inputLine.Split(" ");
             var name1 = parts[0];

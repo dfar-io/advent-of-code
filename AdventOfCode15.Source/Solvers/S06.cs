@@ -8,7 +8,7 @@ public class S06 : BaseSolver
         var a1 = 0;
         var a2 = 0;
 
-        foreach (var commandString in _input)
+        foreach (var commandString in Input)
         {
             var command = new Command(commandString);
 

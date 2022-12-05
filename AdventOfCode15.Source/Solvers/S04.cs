@@ -7,7 +7,7 @@ public class S04 : BaseSolver
 
         while (true)
         {
-            var hash = GetHash($"{_input[0]}{x}");
+            var hash = GetHash($"{Input[0]}{x}");
             if (hash.StartsWith("00000") && Answer1 == null)
             {
                 Answer1 = x.ToString();

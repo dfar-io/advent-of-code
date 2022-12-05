@@ -5,7 +5,7 @@ public class S11 : BaseSolver
     public S11(string input)
         : base(input)
     {
-        var newPassword = _input[0];
+        var newPassword = Input[0];
 
         while (!IsPasswordValid(newPassword))
         {

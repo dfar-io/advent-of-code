@@ -7,7 +7,7 @@ public class S09 : BaseSolver
 
         // 1. Create list of distances
         var distances = new List<(string D1, string D2, int Distance)>();
-        foreach (var distanceString in _input)
+        foreach (var distanceString in Input)
         {
             var parts = distanceString.Split();
             var d1 = parts[0];

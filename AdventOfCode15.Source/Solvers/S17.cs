@@ -18,7 +18,7 @@ public class S17 : BaseSolver
             {
                 if (bitArray[j])
                 {
-                    total += int.Parse(_input[j]);
+                    total += int.Parse(Input[j]);
                 }
             }
 

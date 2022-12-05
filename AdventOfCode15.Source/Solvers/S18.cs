@@ -4,9 +4,11 @@ public class S18 : BaseSolver
 
     public S18(string[] input)
         : this(input, 100)
-        {}
+        {
+        }
 
-    public S18(string[] input, int steps) : base(input)
+    public S18(string[] input, int steps)
+        : base(input)
     {
         _currentState = new bool[input.Length, input[0].Length];
         bool[,] futureState = new bool[input.Length, input[0].Length];
@@ -63,7 +65,7 @@ public class S18 : BaseSolver
             GetValue(x, y + 1),
             GetValue(x + 1, y - 1),
             GetValue(x + 1, y),
-            GetValue(x + 1, y + 1)
+            GetValue(x + 1, y + 1),
         };
 
         return neighbors.Count(n => n) switch
