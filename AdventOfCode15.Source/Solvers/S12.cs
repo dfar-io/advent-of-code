@@ -16,7 +16,7 @@ public class S12 : BaseSolver
             sum += Process(jsonObject);
         }
 
-        //remove the section commented below to get answer 1
+        // remove the section commented below to get answer 1
         Answer1 = sum.ToString();
     }
 

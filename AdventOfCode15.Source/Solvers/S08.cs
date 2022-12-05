@@ -1,11 +1,5 @@
 public class S08 : BaseSolver
 {
-    public int CharCount { get; private set; }
-
-    public int Char2Count { get; private set; }
-
-    public int StringCount { get; private set; }
-
     public S08(string[] input)
         : base(input)
     {
@@ -19,6 +13,12 @@ public class S08 : BaseSolver
         Answer1 = (CharCount - StringCount).ToString();
         Answer2 = (Char2Count - CharCount).ToString();
     }
+
+    public int CharCount { get; private set; }
+
+    public int Char2Count { get; private set; }
+
+    public int StringCount { get; private set; }
 
     private int GetStringCount(string value)
     {

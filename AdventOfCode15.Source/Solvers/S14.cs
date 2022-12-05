@@ -3,9 +3,11 @@ public class S14 : BaseSolver
     // Setup allows for me to pass in optional race distance for unit tests
     public S14(string[] input)
         : this(input, 2503)
-        {}
+        {
+        }
 
-    public S14(string[] input, int raceDistance) : base(input)
+    public S14(string[] input, int raceDistance)
+        : base(input)
     {
         var reindeerData = new List<Reindeer>();
 
@@ -52,6 +54,7 @@ public class S14 : BaseSolver
         }
 
         public int Points { get; private set; }
+
         public int Distance { get; private set; }
 
         public void Tick()

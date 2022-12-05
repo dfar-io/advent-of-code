@@ -10,7 +10,7 @@ public class S13 : BaseSolver
         {
             var parts = inputLine.Split(" ");
             var name1 = parts[0];
-            
+
             var change = int.Parse(parts[3]);
             if (parts[2] == "lose") { change *= -1; }
 

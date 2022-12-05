@@ -5,7 +5,7 @@ public class S21 : BaseSolver
     private readonly double _bossArmor;
 
     // Calculated these manually
-    private Dictionary<int, (int min, int max)> _damageCosts = new Dictionary<int, (int min, int max)>()
+    private Dictionary<int, (int Min, int Max)> _damageCosts = new Dictionary<int, (int Min, int Max)>()
     {
         [4] = (8, 8),
         [5] = (10, 33),
@@ -19,7 +19,7 @@ public class S21 : BaseSolver
         [13] = (224, -1),
     };
 
-    private Dictionary<int, (int min, int max)> _armorCosts = new Dictionary<int, (int min, int max)>()
+    private Dictionary<int, (int Min, int Max)> _armorCosts = new Dictionary<int, (int Min, int Max)>()
     {
         [0] = (0, 0),
         [1] = (13, -1),
@@ -49,7 +49,7 @@ public class S21 : BaseSolver
         var turnsToWin = FindTurnsToWin();
         var turnsToLose = FindTurnsToLose(playerHitPoints);
 
-        var winningValues = new List<(int damage, int armor)>();
+        var winningValues = new List<(int Damage, int Armor)>();
         for (int i = 0; i < turnsToWin.Length; i++)
         {
             var winningTurnCount = turnsToWin[i];
@@ -68,10 +68,10 @@ public class S21 : BaseSolver
         foreach (var winningValue in winningValues)
         {
             // process losing value
-            if (winningValue.armor > 0)
+            if (winningValue.Armor > 0)
             {
-                var maxDamageCost = _damageCosts[winningValue.damage].max;
-                var maxArmorCost = _armorCosts[winningValue.armor - 1].max;
+                var maxDamageCost = _damageCosts[winningValue.Damage].Max;
+                var maxArmorCost = _armorCosts[winningValue.Armor - 1].Max;
                 var maxResult = maxDamageCost + maxArmorCost;
                 if (maxResult > maximumLosingGold)
                 {
@@ -79,8 +79,8 @@ public class S21 : BaseSolver
                 }
             }
 
-            var damageCost = _damageCosts[winningValue.damage].min;
-            var armorCost = _armorCosts[winningValue.armor].min;
+            var damageCost = _damageCosts[winningValue.Damage].Min;
+            var armorCost = _armorCosts[winningValue.Armor].Min;
             var result = damageCost + armorCost;
             if (result < minimumGold)
             {

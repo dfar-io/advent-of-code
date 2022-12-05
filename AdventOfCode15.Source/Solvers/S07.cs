@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 public class S07 : BaseSolver
 {
     private List<WireValue> _wires = new List<WireValue>();
@@ -9,17 +11,33 @@ public class S07 : BaseSolver
 
         // To get answer 2, change input to use the value of wire a from part 1
         // So <value of a> -> b
-        Answer1 = GetWireValue("a").Value.ToString();
+        Answer1 = GetWireValue("a").ToString();
     }
+
+    private enum Operator
+    {
+        DIRECT,
+        AND,
+        OR,
+        LSHIFT,
+        RSHIFT,
+        NOT,
+    }
+
+    [SuppressMessage(
+        "StyleCop.CSharp.OrderingRules",
+        "SA1201:ElementsMustAppearInTheCorrectOrder",
+        Justification = "Not sure where to place a private record")]
+    private record WireValue(string Wire, ushort Value);
 
     public bool WireValueExists(string wire)
     {
         return _wires.FirstOrDefault(w => w.Wire == wire) != null;
     }
 
-    public WireValue GetWireValue(string wire)
+    public ushort GetWireValue(string wire)
     {
-        return _wires.First(w => w.Wire == wire);
+        return _wires.First(w => w.Wire == wire).Value;
     }
 
     private void ProcessCircuit()
@@ -69,8 +87,8 @@ public class S07 : BaseSolver
             return;
         }
 
-        var value1 = GetWireValue(instruction.SourceWire1).Value;
-        var value2 = GetWireValue(instruction.SourceWire2).Value;
+        var value1 = GetWireValue(instruction.SourceWire1);
+        var value2 = GetWireValue(instruction.SourceWire2);
         _wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 | value2)));
     }
 
@@ -79,24 +97,24 @@ public class S07 : BaseSolver
         // See if we were provided with a value for the wire instead of a wire
         int value1 = 0, value2 = 0;
 
-        UInt16.TryParse(instruction.SourceWire1.ToString(), out ushort v1);
+        ushort.TryParse(instruction.SourceWire1.ToString(), out ushort v1);
         if (v1 != 0)
         {
             value1 = v1;
         }
         else if (WireValueExists(instruction.SourceWire1))
         {
-            value1 = GetWireValue(instruction.SourceWire1).Value;
+            value1 = GetWireValue(instruction.SourceWire1);
         }
 
-        UInt16.TryParse(instruction.SourceWire2.ToString(), out ushort v2);
+        ushort.TryParse(instruction.SourceWire2.ToString(), out ushort v2);
         if (v2 != 0)
         {
             value2 = v2;
         }
         else if (WireValueExists(instruction.SourceWire2))
         {
-            value2 = GetWireValue(instruction.SourceWire2).Value;
+            value2 = GetWireValue(instruction.SourceWire2);
         }
 
         if (value1 != 0 && value2 != 0)
@@ -111,8 +129,8 @@ public class S07 : BaseSolver
         {
             return;
         }
-        
-        var value = GetWireValue(instruction.SourceWire1).Value;
+
+        var value = GetWireValue(instruction.SourceWire1);
         var shiftValue = instruction.ShiftValue;
         if (op == Operator.LSHIFT)
         {
@@ -127,7 +145,7 @@ public class S07 : BaseSolver
     private void ProcessNot(Instruction instruction)
     {
         if (!WireValueExists(instruction.SourceWire1)) { return; }
-        var value = GetWireValue(instruction.SourceWire1).Value;
+        var value = GetWireValue(instruction.SourceWire1);
 
         // Needs to be recast to ushort to prevent overflow
         _wires.Add(new WireValue(instruction.DestinationWire, (ushort)(~value)));
@@ -141,89 +159,82 @@ public class S07 : BaseSolver
         }
         else if (WireValueExists(instruction.SourceWire1))
         {
-            var value = GetWireValue(instruction.SourceWire1).Value;
+            var value = GetWireValue(instruction.SourceWire1);
             _wires.Add(new WireValue(instruction.DestinationWire, value));
         }
     }
-}
 
-public record WireValue(string Wire, ushort Value);
-
-class Instruction
-{
-    public string SourceWire1 { get; private set; }
-    public string SourceWire2 { get; private set; }
-    public int DirectValue { get; private set; }
-    public Operator Operator { get; private set; }
-    public int ShiftValue { get; private set; }
-    public string DestinationWire { get; private set; }
-
-    public Instruction(string instructionString)
+    private class Instruction
     {
-        var splits = instructionString.Split("->");
-        var valueInstruction = splits[0].Trim();
-        DestinationWire = splits[1].Trim();
-        DirectValue = -1;
+        public Instruction(string instructionString)
+        {
+            var splits = instructionString.Split("->");
+            var valueInstruction = splits[0].Trim();
+            DestinationWire = splits[1].Trim();
+            DirectValue = -1;
 
-        if (valueInstruction.Contains("AND"))
-        {
-            var valueInstructionSplits = valueInstruction.Split("AND");
-            SourceWire1 = valueInstructionSplits[0].Trim();
-            SourceWire2 = valueInstructionSplits[1].Trim();
-            Operator = Operator.AND;
-        }
-        else if (valueInstruction.Contains("OR"))
-        {
-            var valueInstructionSplits = valueInstruction.Split("OR");
-            SourceWire1 = valueInstructionSplits[0].Trim();
-            SourceWire2 = valueInstructionSplits[1].Trim();
-            Operator = Operator.OR;
-        }
-        else if (valueInstruction.Contains("LSHIFT"))
-        {
-            var valueInstructionSplits = valueInstruction.Split("LSHIFT");
-            SourceWire1 = valueInstructionSplits[0].Trim();
-            ShiftValue = int.Parse(valueInstructionSplits[1].Trim());
-            Operator = Operator.LSHIFT;
-        }
-        else if (valueInstruction.Contains("RSHIFT"))
-        {
-            var valueInstructionSplits = valueInstruction.Split("RSHIFT");
-            SourceWire1 = valueInstructionSplits[0].Trim();
-            ShiftValue = int.Parse(valueInstructionSplits[1].Trim());
-            Operator = Operator.RSHIFT;
-        }
-        else if (valueInstruction.Contains("NOT"))
-        {
-            var valueInstructionSplits = valueInstruction.Split(" ");
-            SourceWire1 = valueInstructionSplits[1].Trim();
-            Operator = Operator.NOT;
-        }
-        else
-        {
-            if (UInt16.TryParse(valueInstruction, out var directValue))
+            if (valueInstruction.Contains("AND"))
             {
-                DirectValue = directValue;
+                var valueInstructionSplits = valueInstruction.Split("AND");
+                SourceWire1 = valueInstructionSplits[0].Trim();
+                SourceWire2 = valueInstructionSplits[1].Trim();
+                Operator = Operator.AND;
+            }
+            else if (valueInstruction.Contains("OR"))
+            {
+                var valueInstructionSplits = valueInstruction.Split("OR");
+                SourceWire1 = valueInstructionSplits[0].Trim();
+                SourceWire2 = valueInstructionSplits[1].Trim();
+                Operator = Operator.OR;
+            }
+            else if (valueInstruction.Contains("LSHIFT"))
+            {
+                var valueInstructionSplits = valueInstruction.Split("LSHIFT");
+                SourceWire1 = valueInstructionSplits[0].Trim();
+                ShiftValue = int.Parse(valueInstructionSplits[1].Trim());
+                Operator = Operator.LSHIFT;
+            }
+            else if (valueInstruction.Contains("RSHIFT"))
+            {
+                var valueInstructionSplits = valueInstruction.Split("RSHIFT");
+                SourceWire1 = valueInstructionSplits[0].Trim();
+                ShiftValue = int.Parse(valueInstructionSplits[1].Trim());
+                Operator = Operator.RSHIFT;
+            }
+            else if (valueInstruction.Contains("NOT"))
+            {
+                var valueInstructionSplits = valueInstruction.Split(" ");
+                SourceWire1 = valueInstructionSplits[1].Trim();
+                Operator = Operator.NOT;
             }
             else
             {
-                SourceWire1 = valueInstruction.Trim();
+                if (ushort.TryParse(valueInstruction, out var directValue))
+                {
+                    DirectValue = directValue;
+                }
+                else
+                {
+                    SourceWire1 = valueInstruction.Trim();
+                }
+
+                Operator = Operator.DIRECT;
             }
 
-            Operator = Operator.DIRECT;
+            if (SourceWire1 == null) { SourceWire1 = string.Empty; }
+            if (SourceWire2 == null) { SourceWire2 = string.Empty; }
         }
 
-        if (SourceWire1 == null) { SourceWire1 = string.Empty; }
-        if (SourceWire2 == null) { SourceWire2 = string.Empty; }
-    }
-}
+        public string SourceWire1 { get; private set; }
 
-enum Operator
-{
-    DIRECT,
-    AND,
-    OR,
-    LSHIFT,
-    RSHIFT,
-    NOT
+        public string SourceWire2 { get; private set; }
+
+        public int DirectValue { get; private set; }
+
+        public Operator Operator { get; private set; }
+
+        public int ShiftValue { get; private set; }
+
+        public string DestinationWire { get; private set; }
+    }
 }

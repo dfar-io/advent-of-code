@@ -1,6 +1,7 @@
 public class S09 : BaseSolver
 {
-    public S09(string[] input) : base(input)
+    public S09(string[] input)
+        : base(input)
     {
         var a1 = 0;
         var a2 = 0;
@@ -12,7 +13,7 @@ public class S09 : BaseSolver
             var parts = distanceString.Split();
             var d1 = parts[0];
             var d2 = parts[2];
-            var distance = Int32.Parse(parts[4]);
+            var distance = int.Parse(parts[4]);
             distances.Add((d1, d2, distance));
         }
 
@@ -33,7 +34,7 @@ public class S09 : BaseSolver
             {
                 var first = permutation.ElementAt(i);
                 var second = permutation.ElementAt(i + 1);
-                
+
                 var distance = distances.First(d => (d.D1 == first && d.D2 == second) || (d.D2 == first && d.D1 == second));
                 overallDistance += distance.Distance;
             }

@@ -20,13 +20,13 @@ public class S07Tests
             "NOT y -> i"
         };
         var solver = new S07(input);
-        solver.GetWireValue("d").Value.Should().Be(72);
-        solver.GetWireValue("e").Value.Should().Be(507);
-        solver.GetWireValue("f").Value.Should().Be(492);
-        solver.GetWireValue("g").Value.Should().Be(114);
-        solver.GetWireValue("h").Value.Should().Be(65412);
-        solver.GetWireValue("i").Value.Should().Be(65079);
-        solver.GetWireValue("a").Value.Should().Be(123);
-        solver.GetWireValue("y").Value.Should().Be(456);
+        solver.GetWireValue("d").Should().Be(72);
+        solver.GetWireValue("e").Should().Be(507);
+        solver.GetWireValue("f").Should().Be(492);
+        solver.GetWireValue("g").Should().Be(114);
+        solver.GetWireValue("h").Should().Be(65412);
+        solver.GetWireValue("i").Should().Be(65079);
+        solver.GetWireValue("a").Should().Be(123);
+        solver.GetWireValue("y").Should().Be(456);
     }
 }

@@ -72,7 +72,7 @@ public class S18 : BaseSolver
         {
             2 => _currentState[x, y],
             3 => true,
-            _ => false
+            _ => false,
         };
     }
 
