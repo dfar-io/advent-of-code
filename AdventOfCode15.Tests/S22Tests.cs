@@ -13,6 +13,6 @@ public class S22Tests
             "Hit Points: 58",
             "Damage: 9"
         });
-        solver.Answer1.Should().Be("65");
+        solver.Answer1.Should().Be("1269");
     }
 }
