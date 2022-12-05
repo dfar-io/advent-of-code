@@ -44,10 +44,7 @@ public class S11 : BaseSolver
 
     private bool IsPasswordValid(string password)
     {
-        if (password.Contains("i") || password.Contains("o") || password.Contains("l"))
-        {
-            return false;
-        }
+        if (password.Contains("i") || password.Contains("o") || password.Contains("l")) { return false; }
 
         var hasStraight = false;
         var pairCount = 0;
@@ -55,7 +52,10 @@ public class S11 : BaseSolver
 
         for (int i = 0; i < password.Length - 1; i++)
         {
-            hasStraight = HasStraight(password, hasStraight, i);
+            if (!hasStraight && i < password.Length - 2 && password[i] + 1 == password[i + 1] && password[i] + 2 == password[i + 2])
+            {
+                hasStraight = true;
+            }
 
             if (password[i] == password[i + 1] && !previousPair)
             {
@@ -69,10 +69,5 @@ public class S11 : BaseSolver
         }
 
         return hasStraight && pairCount > 1;
-    }
-
-    private static bool HasStraight(string password, bool hasStraight, int i)
-    {
-        return !hasStraight && i < password.Length - 2 && password[i] + 1 == password[i + 1] && password[i] + 2 == password[i + 2];
     }
 }
