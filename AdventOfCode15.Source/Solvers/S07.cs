@@ -61,10 +61,7 @@ public class S07 : BaseSolver
 
     private void ProcessOr(Instruction instruction)
     {
-        if (!WireValueExists(instruction.SourceWire1) || !WireValueExists(instruction.SourceWire2))
-        {
-            return;
-        }
+        if (!WireValueExists(instruction.SourceWire1) || !WireValueExists(instruction.SourceWire2)) { return; }
 
         var value1 = GetWireValue(instruction.SourceWire1);
         var value2 = GetWireValue(instruction.SourceWire2);
