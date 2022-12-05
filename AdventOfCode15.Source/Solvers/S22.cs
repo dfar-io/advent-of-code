@@ -12,12 +12,12 @@ public class S22 : BaseSolver
     private bool? _isPlayerWinner;
     private int _spentMana;
 
-    public S22(string[] input) : base(input)
+    public S22(string[] input)
+        : base(input)
     {
         _isPlayerWinner = null;
-        _bossHp  = int.Parse(_input[0].Split(": ")[1]);
+        _bossHp = int.Parse(_input[0].Split(": ")[1]);
         var bossDamage = int.Parse(_input[1].Split(": ")[1]);
-        // No boss armor
 
         _playerHp = 50;
         _playerMana = 500;
@@ -32,6 +32,7 @@ public class S22 : BaseSolver
             {
                 break;
             }
+
             PerformPlayerTurn();
 
             // Boss turn
@@ -42,30 +43,48 @@ public class S22 : BaseSolver
             {
                 break;
             }
+
             var bossDamageDealt = Math.Max(1, bossDamage - _playerArmor);
             Console.WriteLine($"Boss deals {bossDamageDealt} damage; you go down to {_playerHp - bossDamageDealt} hit points.");
             _playerHp -= bossDamage - _playerArmor;
         }
 
         Console.WriteLine(_isPlayerWinner.Value ? "Player wins" : "Boss wins");
-        // 1309 too high
-        _answer1 = _spentMana.ToString();
+        Answer1 = _spentMana.ToString();
     }
 
     private void PerformPlayerTurn()
     {
-        if (_bossHp <= 4) { MagicMissile(); }
-        else if (_playerHp == 8) { Drain(); }
-        else if (_poisonCount == 0) { Poison(); }
-        else if (_regenCount == 0 && _bossHp > 19) { Recharge(); }
-        else if (_shieldCount == 0 && _bossHp > 31) { Shield(); }
-        else { MagicMissile(); }
+        if (_bossHp <= 4)
+        {
+            MagicMissile();
+        }
+        else if (_playerHp == 8)
+        {
+            Drain();
+        }
+        else if (_poisonCount == 0)
+        {
+            Poison();
+        }
+        else if (_regenCount == 0 && _bossHp > 19)
+        {
+            Recharge();
+        }
+        else if (_shieldCount == 0 && _bossHp > 31)
+        {
+            Shield();
+        }
+        else
+        {
+            MagicMissile();
+        }
     }
 
     private void Upkeep()
     {
         // part 2
-        //_playerHp--;
+        // _playerHp--;
 
         if (_playerHp <= 0 || _playerMana <= 0)
         {

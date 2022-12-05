@@ -3,10 +3,11 @@ using System.Text.RegularExpressions;
 
 public class S19 : BaseSolver
 {
-    public S19(string[] input) : base(input)
+    public S19(string[] input)
+        : base(input)
     {
         var replacements = new List<KeyValuePair<string, string>>();
-        var initialMolecule = "";
+        var initialMolecule = string.Empty;
         var molecules = new HashSet<string>();
 
         // Initialize data from input
@@ -25,15 +26,15 @@ public class S19 : BaseSolver
 
         // We should split the initial molecule into upper/lowercase parts
         // Then loop through it with a foreach
-        string[] initialMoleculeSplit =  Regex.Split(initialMolecule, @"(?<!^)(?=[A-Z])");
+        string[] initialMoleculeSplit = Regex.Split(initialMolecule, @"(?<!^)(?=[A-Z])");
         for (var i = 0; i < initialMoleculeSplit.Length; i++)
         {
             var eligibleReplacements = replacements.Where(x => x.Key == initialMoleculeSplit[i]);
             foreach (var replacement in eligibleReplacements)
             {
-                var newMolecule = string.Join("", initialMoleculeSplit, 0, i) +
+                var newMolecule = string.Join(string.Empty, initialMoleculeSplit, 0, i) +
                                   replacement.Value +
-                                  string.Join("", initialMoleculeSplit, i + 1, initialMoleculeSplit.Length - i - 1);
+                                  string.Join(string.Empty, initialMoleculeSplit, i + 1, initialMoleculeSplit.Length - i - 1);
                 molecules.Add(newMolecule);
             }
         }
@@ -57,7 +58,7 @@ public class S19 : BaseSolver
             }
         }
         
-        _answer1 = molecules.Count().ToString();
-        _answer2 = stepCount.ToString();
+        Answer1 = molecules.Count().ToString();
+        Answer2 = stepCount.ToString();
     }
 }

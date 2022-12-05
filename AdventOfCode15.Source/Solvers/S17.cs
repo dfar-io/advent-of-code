@@ -1,6 +1,7 @@
 public class S17 : BaseSolver
 {
-    public S17(string[] input, int eggNogAmount = 150) : base(input)
+    public S17(string[] input, int eggNogAmount = 150)
+        : base(input)
     {
         var bitCount = Math.Pow(2, input.Length);
         var availableCombinations = 0;
@@ -36,7 +37,7 @@ public class S17 : BaseSolver
             }
         }
 
-        _answer1 = availableCombinations.ToString();
-        _answer2 = availableCombinationsWithMinContainers.ToString();
+        Answer1 = availableCombinations.ToString();
+        Answer2 = availableCombinationsWithMinContainers.ToString();
     }
 }

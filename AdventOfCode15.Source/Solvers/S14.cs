@@ -26,8 +26,8 @@ public class S14 : BaseSolver
             }
         }
 
-        _answer1 = reindeerData.Max(r => r.Distance).ToString();
-        _answer2 = reindeerData.Max(r => r.Points).ToString();
+        Answer1 = reindeerData.Max(r => r.Distance).ToString();
+        Answer2 = reindeerData.Max(r => r.Points).ToString();
     }
 }
 

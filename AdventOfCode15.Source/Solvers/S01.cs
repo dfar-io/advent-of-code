@@ -1,10 +1,11 @@
 public class S01 : BaseSolver
 {
-    public S01(string input) : base(input)
+    public S01(string input)
+        : base(input)
     {
         var upCount = _input[0].Count(c => c == '(');
         var downCount = _input[0].Count(c => c == ')');
-        _answer1 = (upCount - downCount).ToString();
+        Answer1 = (upCount - downCount).ToString();
 
         var elevation = 0;
         var position = 0;
@@ -22,7 +23,7 @@ public class S01 : BaseSolver
 
             if (elevation == -1)
             {
-                _answer2 = position.ToString();
+                Answer2 = position.ToString();
                 break;
             }
         }

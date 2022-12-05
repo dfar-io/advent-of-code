@@ -1,6 +1,7 @@
 public class S20 : BaseSolver
 {
-    public S20(string input) : base(input)
+    public S20(string input)
+        : base(input)
     {
         for (int i = 1; i < int.MaxValue; i++)
         {
@@ -9,7 +10,7 @@ public class S20 : BaseSolver
             int presents = GetFactors(i).Where(f => f * 50 >= i).Sum() * 11;
             if (presents >= int.Parse(_input[0]))
             {
-                _answer1 = i.ToString();
+                Answer1 = i.ToString();
                 break;
             }
         }
@@ -24,7 +25,9 @@ public class S20 : BaseSolver
             {
                 yield return i;
                 if (i != x / i)
+                {
                     yield return x / i;
+                }
             }
         }
     }

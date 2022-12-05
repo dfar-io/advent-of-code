@@ -49,7 +49,7 @@ public class S09 : BaseSolver
             }
         }
 
-        _answer1 = a1.ToString();
-        _answer2 = a2.ToString();
+        Answer1 = a1.ToString();
+        Answer2 = a2.ToString();
     }
 }

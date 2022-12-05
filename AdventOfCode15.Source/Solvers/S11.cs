@@ -2,7 +2,8 @@ using System.Text;
 
 public class S11 : BaseSolver
 {
-    public S11(string input) : base(input)
+    public S11(string input)
+        : base(input)
     {
         var newPassword = _input[0];
 
@@ -11,7 +12,7 @@ public class S11 : BaseSolver
             newPassword = IncrementPassword(newPassword);
         }
 
-        _answer1 = newPassword;
+        Answer1 = newPassword;
         newPassword = IncrementPassword(newPassword);
 
         while (!IsPasswordValid(newPassword))
@@ -19,7 +20,7 @@ public class S11 : BaseSolver
             newPassword = IncrementPassword(newPassword);
         }
         
-        _answer2 = newPassword;
+        Answer2 = newPassword;
     }
 
     private string IncrementPassword(string password)

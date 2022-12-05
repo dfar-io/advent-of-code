@@ -3,7 +3,8 @@ using Newtonsoft.Json.Linq;
 
 public class S12 : BaseSolver
 {
-    public S12(string input) : base(input)
+    public S12(string input)
+        : base(input)
     {
         var sum = 0;
         var jsonString = _input[0];
@@ -16,7 +17,7 @@ public class S12 : BaseSolver
         }
 
         //remove the section commented below to get answer 1
-        _answer1 = sum.ToString();
+        Answer1 = sum.ToString();
     }
 
     private int Process(JToken jsonObject)
@@ -55,6 +56,7 @@ public class S12 : BaseSolver
 
             objectSum += Process(objectObject);
         }
+
         return objectSum;
     }
 
@@ -79,6 +81,7 @@ public class S12 : BaseSolver
         {
             arraySum += Process(arrayObject);
         }
+
         return arraySum;
     }
 }

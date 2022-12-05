@@ -1,40 +1,68 @@
 public class S07 : BaseSolver
 {
-    List<WireValue> wires = new List<WireValue>();
+    private List<WireValue> _wires = new List<WireValue>();
 
-    public S07(string[] input) : base(input)
+    public S07(string[] input)
+        : base(input)
     {
         ProcessCircuit();
 
         // To get answer 2, change input to use the value of wire a from part 1
         // So <value of a> -> b
-        _answer1 = GetWireValue("a").Value.ToString();
+        Answer1 = GetWireValue("a").Value.ToString();
     }
 
     private void ProcessCircuit()
     {
         var instructions = _input.Select(s => new Instruction(s)).ToList();
-        while (instructions.Count() != wires.Count())
+        while (instructions.Count() != _wires.Count())
         {
             foreach (var instruction in instructions)
             {
-                if (wires.Any(w => w.Wire == instruction.DestinationWire)) { continue; }
-                if (instruction.Operator == Operator.DIRECT) { ProcessDirect(instruction); }
-                else if (instruction.Operator == Operator.NOT) { ProcessNot(instruction); }
-                else if (instruction.Operator == Operator.LSHIFT) { ProcessShift(instruction, Operator.LSHIFT); }
-                else if (instruction.Operator == Operator.RSHIFT) { ProcessShift(instruction, Operator.RSHIFT); }
-                else if (instruction.Operator == Operator.AND) { ProcessAnd(instruction); }
-                else if (instruction.Operator == Operator.OR) { ProcessOr(instruction); }
+                if (_wires.Any(w => w.Wire == instruction.DestinationWire))
+                {
+                    continue;
+                }
+
+                if (instruction.Operator == Operator.DIRECT)
+                {
+                    ProcessDirect(instruction);
+                }
+
+                else if (instruction.Operator == Operator.NOT)
+                {
+                    ProcessNot(instruction);
+                }
+
+                else if (instruction.Operator == Operator.LSHIFT)
+                {
+                    ProcessShift(instruction, Operator.LSHIFT);
+                }
+
+                else if (instruction.Operator == Operator.RSHIFT)
+                {
+                    ProcessShift(instruction, Operator.RSHIFT);
+                }
+
+                else if (instruction.Operator == Operator.AND)
+                {
+                    ProcessAnd(instruction);
+                }
+                
+                else if (instruction.Operator == Operator.OR)
+                {
+                    ProcessOr(instruction);
+                }
             }
         }
     }
 
     private void ProcessOr(Instruction instruction)
     {
-        if (!WireValueExists(instruction.SourceWire1) || !WireValueExists(instruction.SourceWire2)) { return;}
+        if (!WireValueExists(instruction.SourceWire1) || !WireValueExists(instruction.SourceWire2)) { return; }
         var value1 = GetWireValue(instruction.SourceWire1).Value;
         var value2 = GetWireValue(instruction.SourceWire2).Value;
-        wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 | value2)));
+        _wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 | value2)));
     }
 
     private void ProcessAnd(Instruction instruction)
@@ -58,7 +86,7 @@ public class S07 : BaseSolver
 
         if (value1 != 0 && value2 != 0)
         {
-            wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 & value2)));
+            _wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value1 & value2)));
         }
     }
 
@@ -69,11 +97,11 @@ public class S07 : BaseSolver
         var shiftValue = instruction.ShiftValue;
         if (op == Operator.LSHIFT)
         {
-            wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value << shiftValue)));
+            _wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value << shiftValue)));
         }
         else
         {
-            wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value >> shiftValue)));
+            _wires.Add(new WireValue(instruction.DestinationWire, Convert.ToUInt16(value >> shiftValue)));
         }
     }
 
@@ -82,30 +110,30 @@ public class S07 : BaseSolver
         if (!WireValueExists(instruction.SourceWire1)) { return; }
         var value = GetWireValue(instruction.SourceWire1).Value;
         // Needs to be recast to ushort to prevent overflow
-        wires.Add(new WireValue(instruction.DestinationWire, (ushort)(~value)));
+        _wires.Add(new WireValue(instruction.DestinationWire, (ushort)(~value)));
     }
 
     private void ProcessDirect(Instruction instruction)
     {
         if (instruction.DirectValue != -1)
         {
-            wires.Add(new WireValue(instruction.DestinationWire, (ushort)instruction.DirectValue));
+            _wires.Add(new WireValue(instruction.DestinationWire, (ushort)instruction.DirectValue));
         }
         else if (WireValueExists(instruction.SourceWire1))
         {
             var value = GetWireValue(instruction.SourceWire1).Value;
-            wires.Add(new WireValue(instruction.DestinationWire, value));
+            _wires.Add(new WireValue(instruction.DestinationWire, value));
         }
     }
 
     public bool WireValueExists(string wire)
     {
-        return wires.FirstOrDefault(w => w.Wire == wire) != null;
+        return _wires.FirstOrDefault(w => w.Wire == wire) != null;
     }
 
     public WireValue GetWireValue(string wire)
     {
-        return wires.First(w => w.Wire == wire);
+        return _wires.First(w => w.Wire == wire);
     }
 }
 

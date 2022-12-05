@@ -10,6 +10,7 @@ var latestSolver = AppDomain.CurrentDomain.GetAssemblies()
                 .Where(classType.IsAssignableFrom)
                 .OrderByDescending(s => s.FullName)
                 .First();
+
 // Need to use the new object[] to insert the lines array as one object,
 // otherwise the params will read each line
 var solverInstance = lines.Count() == 1 ?
@@ -31,11 +32,13 @@ if (a1prop == null)
 {
     throw new Exception("Error when getting Answer1 property of latest solver");
 }
+
 var a2prop = type.GetProperty("Answer2");
 if (a2prop == null)
 {
     throw new Exception("Error when getting Answer2 property of latest solver");
 }
+
 var answer1 = a1prop.GetValue(solverInstance);
 var answer2 = a2prop.GetValue(solverInstance);
 

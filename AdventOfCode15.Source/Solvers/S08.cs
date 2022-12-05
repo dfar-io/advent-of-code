@@ -4,7 +4,8 @@ public class S08 : BaseSolver
     public int Char2Count { get; private set; }
     public int StringCount { get; private set; }
 
-    public S08(string[] input) : base(input)
+    public S08(string[] input)
+        : base(input)
     {
         foreach (var line in _input)
         {
@@ -13,8 +14,8 @@ public class S08 : BaseSolver
             StringCount += GetStringCount(line);
         }
 
-        _answer1 = (CharCount - StringCount).ToString();
-        _answer2 = (Char2Count - CharCount).ToString();
+        Answer1 = (CharCount - StringCount).ToString();
+        Answer2 = (Char2Count - CharCount).ToString();
     }
 
     private int GetStringCount(string value)

@@ -4,11 +4,13 @@ public class S03 : BaseSolver
     private HashSet<(int, int)> _nonRoboVisited = new HashSet<(int, int)>();
     private HashSet<(int, int)> _roboVisited = new HashSet<(int, int)>();
 
-    public S03(string input) : this(new string[] {input})
+    public S03(string input)
+        : this(new string[] { input })
     {
     }
-    
-    public S03(string[] input) : base(input)
+
+    public S03(string[] input)
+        : base(input)
     {
         var x = 0;
         var y = 0;
@@ -41,8 +43,8 @@ public class S03 : BaseSolver
             ModifyLocation(ref x, ref y, direction);
             _visited.Add((x, y));
 
-            _answer1 = _visited.Count().ToString();
-            _answer2 = _roboVisited.Union(_nonRoboVisited).Count().ToString();
+            Answer1 = _visited.Count().ToString();
+            Answer2 = _roboVisited.Union(_nonRoboVisited).Count().ToString();
         }
     }
 

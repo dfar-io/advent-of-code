@@ -2,7 +2,8 @@ using System.Text;
 
 public class S10 : BaseSolver
 {
-    public S10(string input) : base(input)
+    public S10(string input)
+        : base(input)
     {
         var result = _input[0];
 
@@ -12,7 +13,7 @@ public class S10 : BaseSolver
         }
 
         // To get answer 1, change the rep count to 40
-        _answer2 = result.Length.ToString();
+        Answer2 = result.Length.ToString();
     }
 
     private string PerformLookAndSay(string input)

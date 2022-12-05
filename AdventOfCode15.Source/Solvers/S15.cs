@@ -50,8 +50,8 @@ public class S15 : BaseSolver
             }
         }
 
-        _answer1 = optimalScore.ToString();
-        _answer2 = optimalScore500Calories.ToString();
+        Answer1 = optimalScore.ToString();
+        Answer2 = optimalScore500Calories.ToString();
     }
 
     // This is set hardcoded to 4 ingredients (aka the puzzle input)
