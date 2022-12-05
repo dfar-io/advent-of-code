@@ -79,12 +79,22 @@ public class S22 : BaseSolver
             return;
         }
 
-        if (_regenCount > 0)
-        {
-            _regenCount--;
-            _playerMana += 101;
-        }
+        ProcessRegen();
+        ProcessShield();
+        ProcessPoison();
+    }
 
+    private void ProcessPoison()
+    {
+        if (_poisonCount > 0)
+        {
+            _poisonCount--;
+            _bossHp -= 3;
+        }
+    }
+
+    private void ProcessShield()
+    {
         if (_shieldCount > 0)
         {
             _shieldCount--;
@@ -94,11 +104,14 @@ public class S22 : BaseSolver
         {
             _playerArmor = 0;
         }
+    }
 
-        if (_poisonCount > 0)
+    private void ProcessRegen()
+    {
+        if (_regenCount > 0)
         {
-            _poisonCount--;
-            _bossHp -= 3;
+            _regenCount--;
+            _playerMana += 101;
         }
     }
 
