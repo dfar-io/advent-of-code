@@ -54,12 +54,12 @@ public class S22 : BaseSolver
 
     private void PerformPlayerTurn()
     {
-        if (_bossHp <= 4) { MagicMissile(); return; }
-        if (_playerHp == 8) { Drain(); return; }
-        if (_poisonCount == 0) { Poison(); return; }
-        if (_regenCount == 0 && _bossHp > 19) { Recharge(); return; }
-        if (_shieldCount == 0 && _bossHp > 31) { Shield(); return; }
-        MagicMissile();
+        if (_bossHp <= 4) { MagicMissile(); }
+        else if (_playerHp == 8) { Drain(); }
+        else if (_poisonCount == 0) { Poison(); }
+        else if (_regenCount == 0 && _bossHp > 19) { Recharge(); }
+        else if (_shieldCount == 0 && _bossHp > 31) { Shield(); }
+        else { MagicMissile(); }
     }
 
     private void Upkeep()
