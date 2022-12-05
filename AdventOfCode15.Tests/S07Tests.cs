@@ -12,10 +12,10 @@ public class S07Tests
         {
             "a LSHIFT 2 -> f",
             "y RSHIFT 2 -> g",
-            "123 -> a",
-            "456 -> y",
             "a AND y -> d",
             "a OR y -> e",
+            "123 -> a",
+            "456 -> y",
             "NOT a -> h",
             "NOT y -> i"
         };
