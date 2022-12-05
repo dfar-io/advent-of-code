@@ -10,12 +10,12 @@ public class S07Tests
     {
         var input = new string[]
         {
+            "a LSHIFT 2 -> f",
+            "y RSHIFT 2 -> g",
             "123 -> a",
             "456 -> y",
             "a AND y -> d",
             "a OR y -> e",
-            "a LSHIFT 2 -> f",
-            "y RSHIFT 2 -> g",
             "NOT a -> h",
             "NOT y -> i"
         };
