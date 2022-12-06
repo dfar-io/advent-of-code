@@ -1,20 +1,16 @@
 public class S04 : BaseSolver
 {
-
-    public S04(string input) : base(input)
+    public S04(string input)
+        : base(input)
     {
         var x = 0;
 
         while (true)
         {
-            var hash = GetHash($"{_input[0]}{x}");
-            if (hash.StartsWith("00000") && _answer1 == null)
-            {
-                _answer1 = x.ToString();
-            }
+            var hash = GetHash($"{input}{x}");
             if (hash.StartsWith("000000"))
             {
-                _answer2 = x.ToString();
+                Answer2 = x.ToString();
                 break;
             }
 

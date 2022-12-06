@@ -1,13 +1,14 @@
 public class S06 : BaseSolver
 {
-    public S06(string[] input) : base(input)
+    public S06(string[] input)
+        : base(input)
     {
-        var lights = new bool[1000,1000];
-        var lightsP2 = new int[1000,1000];
+        var lights = new bool[1000, 1000];
+        var lightsP2 = new int[1000, 1000];
         var a1 = 0;
         var a2 = 0;
 
-        foreach (var commandString in _input)
+        foreach (var commandString in Input)
         {
             var command = new Command(commandString);
 
@@ -32,12 +33,20 @@ public class S06 : BaseSolver
                 {
                     a1++;
                 }
+
                 a2 += lightsP2[i, j];
             }
         }
 
-        _answer1 = a1.ToString();
-        _answer2 = a2.ToString();
+        Answer1 = a1.ToString();
+        Answer2 = a2.ToString();
+    }
+
+    private enum CommandType
+    {
+        On,
+        Off,
+        Toggle,
     }
 
     private static void ToggleLights(bool[,] lights, Command command)
@@ -83,47 +92,44 @@ public class S06 : BaseSolver
             }
         }
     }
-}
 
-class Command
-{
-    public CommandType CommandType { get; set; }
-    public int X1 { get; set; }
-    public int Y1 { get; set; }
-    public int X2 { get; set; }
-    public int Y2 { get; set; }
-
-    public Command(string input)
+    private class Command
     {
-        var splits = input.Split(" ");
-        var start = new string[0];
-        var end = new string[0];
-
-        if (splits.Count() == 4)
+        public Command(string input)
         {
-            CommandType = CommandType.Toggle;
-            start = splits[1].Split(",");
-            end = splits[3].Split(",");
-        }
-        else
-        {
-            CommandType = splits[1] == "on" ? CommandType.On : CommandType.Off;
-            start = splits[2].Split(",");
-            end = splits[4].Split(",");
+            var splits = input.Split(" ");
+            var start = new string[0];
+            var end = new string[0];
+
+            if (splits.Count() == 4)
+            {
+                CommandType = CommandType.Toggle;
+                start = splits[1].Split(",");
+                end = splits[3].Split(",");
+            }
+            else
+            {
+                CommandType = splits[1] == "on" ? CommandType.On : CommandType.Off;
+                start = splits[2].Split(",");
+                end = splits[4].Split(",");
+            }
+
+            X1 = int.Parse(start[0]);
+            Y1 = int.Parse(start[1]);
+            X2 = int.Parse(end[0]);
+            Y2 = int.Parse(end[1]);
         }
 
-        X1 = int.Parse(start[0]);
-        Y1 = int.Parse(start[1]);
-        X2 = int.Parse(end[0]);
-        Y2 = int.Parse(end[1]);
+        public CommandType CommandType { get; set; }
+
+        public int X1 { get; set; }
+
+        public int Y1 { get; set; }
+
+        public int X2 { get; set; }
+
+        public int Y2 { get; set; }
+
+        public bool IsTurnOn => CommandType == CommandType.On;
     }
-
-    public bool IsTurnOn => CommandType == CommandType.On;
-}
-
-enum CommandType
-{
-    On,
-    Off,
-    Toggle
 }

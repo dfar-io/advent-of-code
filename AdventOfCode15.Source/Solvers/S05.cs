@@ -2,11 +2,12 @@ using System.Text.RegularExpressions;
 
 public class S05 : BaseSolver
 {
-    public S05(string[] input) : base(input)
+    public S05(string[] input)
+        : base(input)
     {
         var a1Count = 0;
         var a2Count = 0;
-        foreach (var value in _input)
+        foreach (var value in Input)
         {
             if (IsNiceString(value))
             {
@@ -18,15 +19,18 @@ public class S05 : BaseSolver
                 a2Count++;
             }
         }
-        _answer1 = a1Count.ToString();
-        _answer2 = a2Count.ToString();
+
+        Answer1 = a1Count.ToString();
+        Answer2 = a2Count.ToString();
     }
 
     private bool IsNiceString(string value)
     {
         var hasThreeVowels = value.Count(c => "aeiou".Contains(c)) >= 3;
+
         // Grabs pairs of letters next to each other
         Regex regex = new Regex("(.)\\1{1,1}");
+
         var hasDoubleLetter = regex.Matches(value).Count() >= 1;
         var hasInvalidStrings = new[] { "ab", "cd", "pq", "xy" }.Any(c => value.Contains(c));
         return hasThreeVowels && hasDoubleLetter && !hasInvalidStrings;

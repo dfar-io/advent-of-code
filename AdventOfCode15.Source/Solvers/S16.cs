@@ -1,9 +1,10 @@
 public class S16 : BaseSolver
 {
-    public S16(string[] input) : base(input)
+    public S16(string[] input)
+        : base(input)
     {
         var data = new List<Sue>();
-        foreach (var line in _input)
+        foreach (var line in Input)
         {
             var parts = line.Split(" ");
             var number = int.Parse(parts[1].TrimEnd(':'));
@@ -35,54 +36,65 @@ public class S16 : BaseSolver
         }
 
         // Change all to use HasMismatchingProperty to get answer 1
-        _answer2 = correctSueNumber.ToString();
-    }
-}
-
-class Sue
-{
-    public int Number { get; private set; }
-    public Dictionary<string, int> Properties { get; private set; }
-
-    public Sue(int number, string prop1, int prop1Value, string prop2, int prop2Value, string prop3, int prop3Value)
-    {
-        Number = number;
-        Properties = new Dictionary<string, int>();
-        Properties.Add(prop1, prop1Value);
-        Properties.Add(prop2, prop2Value);
-        Properties.Add(prop3, prop3Value);
+        Answer2 = correctSueNumber.ToString();
     }
 
-    public bool HasMismatchingProperty(string propName, int value)
+    private class Sue
     {
-        var propValue = GetPropertyValue(propName);
-        if (propValue == -1) { return false; }
-
-        return propValue != value;
-    }
-
-    public bool HasLessThanOrEqualProperty(string propName, int value)
-    {
-        var propValue = GetPropertyValue(propName);
-        if (propValue == -1) { return false; }
-
-        return propValue <= value;
-    }
-
-    public bool HasGreaterThanOrEqualProperty(string propName, int value)
-    {
-        var propValue = GetPropertyValue(propName);
-        if (propValue == -1) { return false; }
-
-        return propValue >= value;
-    }
-
-    private int GetPropertyValue(string propName)
-    {
-        if (!Properties.TryGetValue(propName, out var value)) {
-            return -1;
+        public Sue(int number, string prop1, int prop1Value, string prop2, int prop2Value, string prop3, int prop3Value)
+        {
+            Number = number;
+            Properties = new Dictionary<string, int>();
+            Properties.Add(prop1, prop1Value);
+            Properties.Add(prop2, prop2Value);
+            Properties.Add(prop3, prop3Value);
         }
 
-        return value;
+        public int Number { get; private set; }
+
+        public Dictionary<string, int> Properties { get; private set; }
+
+        public bool HasMismatchingProperty(string propName, int value)
+        {
+            var propValue = GetPropertyValue(propName);
+            if (propValue == -1)
+            {
+                return false;
+            }
+
+            return propValue != value;
+        }
+
+        public bool HasLessThanOrEqualProperty(string propName, int value)
+        {
+            var propValue = GetPropertyValue(propName);
+            if (propValue == -1)
+            {
+                return false;
+            }
+
+            return propValue <= value;
+        }
+
+        public bool HasGreaterThanOrEqualProperty(string propName, int value)
+        {
+            var propValue = GetPropertyValue(propName);
+            if (propValue == -1)
+            {
+                return false;
+            }
+
+            return propValue >= value;
+        }
+
+        private int GetPropertyValue(string propName)
+        {
+            if (!Properties.TryGetValue(propName, out var value))
+            {
+                return -1;
+            }
+
+            return value;
+        }
     }
 }

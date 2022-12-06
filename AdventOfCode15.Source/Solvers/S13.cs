@@ -1,15 +1,16 @@
 public class S13 : BaseSolver
 {
-    public S13(string[] input) : base(input)
+    public S13(string[] input)
+        : base(input)
     {
         var attendees = new HashSet<string>();
         var data = new List<(string Name1, int Change, string Name2)>();
 
-        foreach (var inputLine in _input)
+        foreach (var inputLine in Input)
         {
             var parts = inputLine.Split(" ");
             var name1 = parts[0];
-            
+
             var change = int.Parse(parts[3]);
             if (parts[2] == "lose") { change *= -1; }
 
@@ -51,6 +52,6 @@ public class S13 : BaseSolver
             if (sum > optimalRating) { optimalRating = sum; }
         }
 
-        _answer1 = optimalRating.ToString();
+        Answer1 = optimalRating.ToString();
     }
 }

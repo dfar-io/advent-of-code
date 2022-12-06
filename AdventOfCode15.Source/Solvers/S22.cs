@@ -12,12 +12,12 @@ public class S22 : BaseSolver
     private bool? _isPlayerWinner;
     private int _spentMana;
 
-    public S22(string[] input) : base(input)
+    public S22(string[] input)
+        : base(input)
     {
         _isPlayerWinner = null;
-        _bossHp  = int.Parse(_input[0].Split(": ")[1]);
-        var bossDamage = int.Parse(_input[1].Split(": ")[1]);
-        // No boss armor
+        _bossHp = int.Parse(Input[0].Split(": ")[1]);
+        var bossDamage = int.Parse(Input[1].Split(": ")[1]);
 
         _playerHp = 50;
         _playerMana = 500;
@@ -32,6 +32,7 @@ public class S22 : BaseSolver
             {
                 break;
             }
+
             PerformPlayerTurn();
 
             // Boss turn
@@ -42,14 +43,14 @@ public class S22 : BaseSolver
             {
                 break;
             }
+
             var bossDamageDealt = Math.Max(1, bossDamage - _playerArmor);
             Console.WriteLine($"Boss deals {bossDamageDealt} damage; you go down to {_playerHp - bossDamageDealt} hit points.");
             _playerHp -= bossDamage - _playerArmor;
         }
 
         Console.WriteLine(_isPlayerWinner.Value ? "Player wins" : "Boss wins");
-        // 1309 too high
-        _answer1 = _spentMana.ToString();
+        Answer1 = _spentMana.ToString();
     }
 
     private void PerformPlayerTurn()
@@ -64,9 +65,7 @@ public class S22 : BaseSolver
 
     private void Upkeep()
     {
-        // part 2
-        //_playerHp--;
-
+        // part 2 _playerHp--;
         if (_playerHp <= 0 || _playerMana <= 0)
         {
             _isPlayerWinner = false;

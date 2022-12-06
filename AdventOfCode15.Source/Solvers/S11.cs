@@ -2,24 +2,25 @@ using System.Text;
 
 public class S11 : BaseSolver
 {
-    public S11(string input) : base(input)
+    public S11(string input)
+        : base(input)
     {
-        var newPassword = _input[0];
+        var newPassword = Input[0];
 
         while (!IsPasswordValid(newPassword))
         {
             newPassword = IncrementPassword(newPassword);
         }
 
-        _answer1 = newPassword;
+        Answer1 = newPassword;
         newPassword = IncrementPassword(newPassword);
 
         while (!IsPasswordValid(newPassword))
         {
             newPassword = IncrementPassword(newPassword);
         }
-        
-        _answer2 = newPassword;
+
+        Answer2 = newPassword;
     }
 
     private string IncrementPassword(string password)
@@ -43,8 +44,7 @@ public class S11 : BaseSolver
 
     private bool IsPasswordValid(string password)
     {
-        if (password.Contains("i") || password.Contains("o") || password.Contains("l"))
-            return false;
+        if (password.Contains("i") || password.Contains("o") || password.Contains("l")) { return false; }
 
         var hasStraight = false;
         var pairCount = 0;

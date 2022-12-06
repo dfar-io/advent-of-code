@@ -3,10 +3,11 @@ using Newtonsoft.Json.Linq;
 
 public class S12 : BaseSolver
 {
-    public S12(string input) : base(input)
+    public S12(string input)
+        : base(input)
     {
         var sum = 0;
-        var jsonString = _input[0];
+        var jsonString = Input[0];
         dynamic json = JsonConvert.DeserializeObject(jsonString)
             ?? throw new Exception("No jsonString passed in.");
 
@@ -15,8 +16,8 @@ public class S12 : BaseSolver
             sum += Process(jsonObject);
         }
 
-        //remove the section commented below to get answer 1
-        _answer1 = sum.ToString();
+        // remove the section commented below to get answer 1
+        Answer1 = sum.ToString();
     }
 
     private int Process(JToken jsonObject)
@@ -55,6 +56,7 @@ public class S12 : BaseSolver
 
             objectSum += Process(objectObject);
         }
+
         return objectSum;
     }
 
@@ -79,6 +81,7 @@ public class S12 : BaseSolver
         {
             arraySum += Process(arrayObject);
         }
+
         return arraySum;
     }
 }

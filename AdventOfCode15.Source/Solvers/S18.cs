@@ -2,9 +2,13 @@ public class S18 : BaseSolver
 {
     private bool[,] _currentState;
 
-    public S18(string[] input) : this(input, 100) {}
+    public S18(string[] input)
+        : this(input, 100)
+        {
+        }
 
-    public S18(string[] input, int steps) : base(input)
+    public S18(string[] input, int steps)
+        : base(input)
     {
         _currentState = new bool[input.Length, input[0].Length];
         bool[,] futureState = new bool[input.Length, input[0].Length];
@@ -40,7 +44,7 @@ public class S18 : BaseSolver
         }
 
         // count lights
-        _answer1 = _currentState.Cast<bool>().Count(x => x).ToString();
+        Answer1 = _currentState.Cast<bool>().Count(x => x).ToString();
     }
 
     private bool GetModifiedValue(int x, int y)
@@ -54,21 +58,21 @@ public class S18 : BaseSolver
 
         var neighbors = new bool[]
         {
-            GetValue(x-1, y-1),
-            GetValue(x-1, y),
-            GetValue(x-1, y+1),
-            GetValue(x, y-1),
-            GetValue(x, y+1),
-            GetValue(x+1, y-1),
-            GetValue(x+1, y),
-            GetValue(x+1, y+1)
+            GetValue(x - 1, y - 1),
+            GetValue(x - 1, y),
+            GetValue(x - 1, y + 1),
+            GetValue(x, y - 1),
+            GetValue(x, y + 1),
+            GetValue(x + 1, y - 1),
+            GetValue(x + 1, y),
+            GetValue(x + 1, y + 1),
         };
 
         return neighbors.Count(n => n) switch
         {
             2 => _currentState[x, y],
             3 => true,
-            _ => false
+            _ => false,
         };
     }
 

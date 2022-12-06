@@ -5,7 +5,7 @@ public class S21 : BaseSolver
     private readonly double _bossArmor;
 
     // Calculated these manually
-    private Dictionary<int, (int min, int max)> damageCosts = new Dictionary<int, (int min, int max)>()
+    private Dictionary<int, (int Min, int Max)> _damageCosts = new Dictionary<int, (int Min, int Max)>()
     {
         [4] = (8, 8),
         [5] = (10, 33),
@@ -16,10 +16,10 @@ public class S21 : BaseSolver
         [10] = (115, -1),
         [11] = (149, -1),
         [12] = (190, -1),
-        [13] = (224, -1)
+        [13] = (224, -1),
     };
 
-    private Dictionary<int, (int min, int max)> armorCosts = new Dictionary<int, (int min, int max)>()
+    private Dictionary<int, (int Min, int Max)> _armorCosts = new Dictionary<int, (int Min, int Max)>()
     {
         [0] = (0, 0),
         [1] = (13, -1),
@@ -31,25 +31,32 @@ public class S21 : BaseSolver
         [7] = (135, -1),
         [8] = (162, -1),
         [9] = (195, -1),
-        [10] = (222, -1)
+        [10] = (222, -1),
     };
 
-    public S21(string[] input) : this(input, 100) {}
+    public S21(string[] input)
+        : this(input, 100)
+        {
+        }
 
-    public S21(string[] input, double playerHitPoints) : base(input)
+    public S21(string[] input, double playerHitPoints)
+        : base(input)
     {
-        _bossHp = double.Parse(_input[0].Split(": ")[1]);
-        _bossDamage = double.Parse(_input[1].Split(": ")[1]);
-        _bossArmor = double.Parse(_input[2].Split(": ")[1]);
+        _bossHp = double.Parse(Input[0].Split(": ")[1]);
+        _bossDamage = double.Parse(Input[1].Split(": ")[1]);
+        _bossArmor = double.Parse(Input[2].Split(": ")[1]);
 
         var turnsToWin = FindTurnsToWin();
         var turnsToLose = FindTurnsToLose(playerHitPoints);
 
-        var winningValues = new List<(int damage, int armor)>();
+        var winningValues = new List<(int Damage, int Armor)>();
         for (int i = 0; i < turnsToWin.Length; i++)
         {
             var winningTurnCount = turnsToWin[i];
-            if (winningTurnCount == -1) continue;
+            if (winningTurnCount == -1)
+            {
+                continue;
+            }
 
             var minimumArmor = Array.FindIndex(turnsToLose, x => x >= winningTurnCount);
 
@@ -61,10 +68,10 @@ public class S21 : BaseSolver
         foreach (var winningValue in winningValues)
         {
             // process losing value
-            if (winningValue.armor > 0)
+            if (winningValue.Armor > 0)
             {
-                var maxDamageCost = damageCosts[winningValue.damage].max;
-                var maxArmorCost = armorCosts[winningValue.armor - 1].max;
+                var maxDamageCost = _damageCosts[winningValue.Damage].Max;
+                var maxArmorCost = _armorCosts[winningValue.Armor - 1].Max;
                 var maxResult = maxDamageCost + maxArmorCost;
                 if (maxResult > maximumLosingGold)
                 {
@@ -72,8 +79,8 @@ public class S21 : BaseSolver
                 }
             }
 
-            var damageCost = damageCosts[winningValue.damage].min;
-            var armorCost = armorCosts[winningValue.armor].min;
+            var damageCost = _damageCosts[winningValue.Damage].Min;
+            var armorCost = _armorCosts[winningValue.Armor].Min;
             var result = damageCost + armorCost;
             if (result < minimumGold)
             {
@@ -81,8 +88,8 @@ public class S21 : BaseSolver
             }
         }
 
-        _answer1 = minimumGold.ToString();
-        _answer2 = maximumLosingGold.ToString();
+        Answer1 = minimumGold.ToString();
+        Answer2 = maximumLosingGold.ToString();
     }
 
     private int[] FindTurnsToWin()
@@ -90,7 +97,7 @@ public class S21 : BaseSolver
         return new int[]
         {
             // using the index as the "attack" value
-            -1, 
+            -1,
             -1,
             -1,
             -1,
@@ -121,7 +128,7 @@ public class S21 : BaseSolver
             (int)Math.Ceiling(playerHitPoints / Math.Max(1, _bossDamage - 7)),
             (int)Math.Ceiling(playerHitPoints / Math.Max(1, _bossDamage - 8)),
             (int)Math.Ceiling(playerHitPoints / Math.Max(1, _bossDamage - 9)),
-            (int)Math.Ceiling(playerHitPoints / Math.Max(1, _bossDamage - 10))
+            (int)Math.Ceiling(playerHitPoints / Math.Max(1, _bossDamage - 10)),
         };
     }
 }
