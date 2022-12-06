@@ -118,13 +118,12 @@ public class S22 : BaseSolver
         _bossHp -= 4;
     }
 
-    private void Drain()
+    private void Shield()
     {
-        Console.WriteLine("Drain");
-        _playerMana -= 73;
-        _spentMana += 73;
-        _bossHp -= 2;
-        _playerHp += 2;
+        Console.WriteLine("Shield");
+        _playerMana -= 113;
+        _spentMana += 113;
+        _shieldCount = 6;
     }
 
     private void Poison()
