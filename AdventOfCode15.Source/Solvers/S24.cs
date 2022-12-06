@@ -43,7 +43,8 @@ public class S24 : BaseSolver
             else
             {
                 int[] possible = set.Take(i).Where(n => n <= sum).ToArray();
-                if (possible.Length > 0) {
+                if (possible.Length > 0)
+                {
                     foreach (string s in GetCombinations(possible, left, vals))
                     {
                         yield return s;
