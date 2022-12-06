@@ -57,7 +57,6 @@ public class S22 : BaseSolver
     private void PerformPlayerTurn()
     {
         if (_bossHp <= 4) { MagicMissile(); }
-        else if (_playerHp == 8) { Drain(); }
         else if (_poisonCount == 0) { Poison(); }
         else if (_regenCount == 0 && _bossHp > 19) { Recharge(); }
         else if (_shieldCount == 0 && _bossHp > 25) { Shield(); }
@@ -68,12 +67,6 @@ public class S22 : BaseSolver
     {
         _isPlayerTurn = !_isPlayerTurn;
         if (_isPlayerTurn) { _playerHp--; }
-
-        if (_playerHp <= 0 || _playerMana <= 0)
-        {
-            _isPlayerWinner = false;
-            return;
-        }
 
         if (_bossHp <= 0)
         {
@@ -132,14 +125,6 @@ public class S22 : BaseSolver
         _spentMana += 73;
         _bossHp -= 2;
         _playerHp += 2;
-    }
-
-    private void Shield()
-    {
-        Console.WriteLine("Shield");
-        _playerMana -= 113;
-        _spentMana += 113;
-        _shieldCount = 6;
     }
 
     private void Poison()
