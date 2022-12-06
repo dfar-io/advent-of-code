@@ -10,6 +10,7 @@ public class S22 : BaseSolver
     private int _poisonCount;
 
     private bool? _isPlayerWinner;
+    private bool _isPlayerTurn;
     private int _spentMana;
 
     public S22(string[] input)
@@ -59,13 +60,16 @@ public class S22 : BaseSolver
         else if (_playerHp == 8) { Drain(); }
         else if (_poisonCount == 0) { Poison(); }
         else if (_regenCount == 0 && _bossHp > 19) { Recharge(); }
-        else if (_shieldCount == 0 && _bossHp > 31) { Shield(); }
+        else if (_shieldCount == 0 && _bossHp > 25) { Shield(); }
         else { MagicMissile(); }
     }
 
     private void Upkeep()
     {
-        // part 2 _playerHp--;
+        _isPlayerTurn = !_isPlayerTurn;
+        // part 2
+        if (_isPlayerTurn) { _playerHp--; }
+
         if (_playerHp <= 0 || _playerMana <= 0)
         {
             _isPlayerWinner = false;
