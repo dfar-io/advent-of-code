@@ -44,7 +44,7 @@ public class S23 : BaseSolver
                     {
                         i += offset - 1;
                     }
-                    
+
                     break;
             }
         }
