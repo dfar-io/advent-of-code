@@ -21,6 +21,6 @@ public class S24Tests
             "10",
             "11",
         });
-        solver.Answer1.Should().Be("99");
+        solver.Answer1.Should().Be("44");
     }
 }

@@ -5,13 +5,13 @@ public class S24 : BaseSolver
     public S24(string[] input)
         : base(input)
     {
-        var thirdOfWeight = Input.Select(int.Parse).Sum() / 3;
+        var fourthOfWeight = Input.Select(int.Parse).Sum() / 4;
         var packages = Input.Select(int.Parse).ToArray();
 
         var minPackages = int.MaxValue;
         var lowestQuantumEntanglement = new BigInteger(long.MaxValue);
 
-        var combinations = GetCombinations(packages, thirdOfWeight);
+        var combinations = GetCombinations(packages, fourthOfWeight);
         foreach (var combinationString in combinations)
         {
             var combination = combinationString.Split(',').Select(int.Parse).ToArray();
