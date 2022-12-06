@@ -67,7 +67,6 @@ public class S22 : BaseSolver
     private void Upkeep()
     {
         _isPlayerTurn = !_isPlayerTurn;
-        // part 2
         if (_isPlayerTurn) { _playerHp--; }
 
         if (_playerHp <= 0 || _playerMana <= 0)
