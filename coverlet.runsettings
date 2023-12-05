@@ -5,8 +5,8 @@
       <DataCollector friendlyName="XPlat code coverage">
         <Configuration>
           <UseSourceLink>true</UseSourceLink>
-          <IncludeDirectory>**/AdventOfCode15.Source</IncludeDirectory>
-          <ExcludeByFile>**/AdventOfCode15.Source/Program.cs</ExcludeByFile>
+          <IncludeDirectory>**/AdventOfCode.Source</IncludeDirectory>
+          <ExcludeByFile>**/AdventOfCode.Source/Program.cs</ExcludeByFile>
         </Configuration>
       </DataCollector>
     </DataCollectors>

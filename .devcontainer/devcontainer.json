@@ -14,7 +14,14 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "dotnet restore"
+	"postCreateCommand": "dotnet restore",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"formulahendry.dotnet-test-explorer"
+			]
+		}
+	}
 
 	// Configure tool-specific properties.
 	// "customizations": {},
