@@ -23,7 +23,7 @@ jobs:
       uses: paambaati/codeclimate-action@v3.2.0
       with:
         coverageCommand: dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings
-        coverageLocations: ${{ github.workspace }}/AdventOfCode15.Tests/TestResults/**/*.xml:cobertura
+        coverageLocations: ${{ github.workspace }}/AdventOfCode.Tests/TestResults/**/*.xml:cobertura
         prefix: /${{ github.workspace }}
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
