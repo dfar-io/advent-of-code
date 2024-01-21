@@ -26,7 +26,7 @@
 
     <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.LayoutRules">
         <Rule Id="SA1501"  Action="None" />             <!-- Statement Must Not Be On Single Line -->
-        <Rule Id="SA1516"  Action="None" />             <!-- Elemnts should be separated by blank line -->
+        <Rule Id="SA1516"  Action="None" />             <!-- Elements should be separated by blank line -->
     </Rules>
 
     <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.DocumentationRules">
