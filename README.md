@@ -1,4 +1,4 @@
-![Test and Publish Code Coverage](https://github.com/dfar-io/aoc15/actions/workflows/test-publish-code-coverage.yml/badge.svg)
+![CI](https://github.com/dfar-io/aoc15/actions/workflows/ci.yml/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/df91ff4070edbe12d568/maintainability)](https://codeclimate.com/github/dfar-io/aoc15/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/df91ff4070edbe12d568/test_coverage)](https://codeclimate.com/github/dfar-io/aoc15/test_coverage)
 
@@ -24,5 +24,7 @@ Create a ruleset file.
 
 Add the following to `.csproj` and reference the above file:
 ```
-
+<PropertyGroup>
+  <CodeAnalysisRuleSet>AdventOfCode.StyleCop.ruleset</CodeAnalysisRuleSet>
+</PropertyGroup>
 ```
