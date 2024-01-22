@@ -3,7 +3,15 @@
 // me already
 
 // use reflection to get the latest solver
-var lines = System.IO.File.ReadAllLines(@"input.txt");
+string[] lines = new string[0];
+try
+{
+    lines = File.ReadAllLines(@"input.txt");
+}
+catch (FileNotFoundException)
+{
+    throw new Exception("Unable to find input file, place 'input.txt' in root.");
+}
 
 var classType = typeof(BaseSolver);
 

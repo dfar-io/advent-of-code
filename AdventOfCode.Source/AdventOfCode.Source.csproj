@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>AdventOfCode.Source</RootNamespace>
+    <RootNamespace>AdventOfCode15.Source</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -22,4 +22,5 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>AdventOfCode.StyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
 </Project>
