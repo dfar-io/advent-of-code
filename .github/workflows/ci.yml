@@ -21,10 +21,11 @@ jobs:
       run: dotnet build /p:TreatWarningsAsErrors=true /warnaserror
     - name: Test
       run: dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings
-    - name: Publish Code Coverage
-      uses: paambaati/codeclimate-action@v5.0.0
-      with:
-        coverageLocations: ${{ github.workspace }}/AdventOfCode.Tests/TestResults/**/*.xml:cobertura
-        prefix: /${{ github.workspace }}
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+    # Having enough trouble with this, going to look into SonarLint as an alternative
+    # - name: Publish Code Coverage
+    #   uses: paambaati/codeclimate-action@v5.0.0
+    #   with:
+    #     coverageLocations: ${{ github.workspace }}/AdventOfCode.Tests/TestResults/**/*.xml:cobertura
+    #     prefix: /${{ github.workspace }}
+    #   env:
+    #     CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
