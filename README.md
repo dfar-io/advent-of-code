@@ -3,6 +3,14 @@
 # advent-of-code
 Solutions to Advent of Code using C#
 
+## Updating dependencies
+
+To update dependencies on the project, run in a Codespace:
+
+```
+dotnet outdated -u
+```
+
 ## Adding StyleCop
 
 Add the following to `.csproj`:
