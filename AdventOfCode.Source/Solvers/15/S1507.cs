@@ -24,12 +24,6 @@ public class S1507 : BaseSolver
         NOT,
     }
 
-    [SuppressMessage(
-        "StyleCop.CSharp.OrderingRules",
-        "SA1201:ElementsMustAppearInTheCorrectOrder",
-        Justification = "Not sure where to place a private record")]
-    private record WireValue(string Wire, ushort Value);
-
     public bool WireValueExists(string wire)
     {
         return _wires.FirstOrDefault(w => w.Wire == wire) != null;
@@ -124,6 +118,8 @@ public class S1507 : BaseSolver
             _wires.Add(new WireValue(instruction.DestinationWire, value));
         }
     }
+
+    private record WireValue(string Wire, ushort Value);
 
     private class Instruction
     {
